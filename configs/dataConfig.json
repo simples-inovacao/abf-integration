@@ -1,0 +1,15 @@
+{
+    "vtex": {
+        "site": "",
+        "usarname": "",
+        "app_key": "",
+        "app_token": ""
+    },
+    "abf": {
+        "account_id": "B755F6B4365C256FF6145ED5968C3139",
+        "account_secret": "996847D2A3856E7AFFB245CBE7103B11"
+    },
+    "bossa": {
+
+    }
+}
