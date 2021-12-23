@@ -9,6 +9,11 @@
         "account_id": "B755F6B4365C256FF6145ED5968C3139",
         "account_secret": "996847D2A3856E7AFFB245CBE7103B11"
     },
+    "tribecca": {
+        "request_url": "https://api-h.portaldofranchising.com.br/simples-integration/companies",
+        "app_key": "6eb461bbe51c4529942ba877f5748a1d",
+        "header": "apiKey"
+    },
     "bossa": {
 
     }
