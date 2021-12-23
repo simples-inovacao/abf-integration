@@ -51,13 +51,45 @@ module.exports = class abfIntegration{
         if(response.length <= 0){
             return await this.createLead(req, lead);
         }else{
-            return response[0]
+            return response;
         }
     }
     /*======== FIM DA CONFIGURAÇÃO DE LEAD ========*/
 
     /*======== INICIO DA CONFIGURAÇÃO DE LISTA ========*/
-    async getListMemberships(req, {emailAddress}){
+    async checkifHasOnList(req, lead, list){
+        let userLists = await this.getListMemberships(req, lead, list);
+        let check = userLists.find(l => l.id === list);
+        if(check) return {status: false, msg: "O contato já está na lista"};
+        return this.addLeadAtList(req, lead, list);
+    }
+
+    async addLeadAtList(req, lead, list){
+        const { emailAddress } = lead;
+        const { data } = await this.query('POST', {
+            method: 'addListMemberEmailAddress', 
+            params: {
+                listID: list,
+                emailAddress: emailAddress
+            },
+            id: req.id
+        });
+        if(data.result === null) return data.error;
+        return data.result.updates;
+    }
+    async getListMemberships(req, {emailAddress}, list){
+        function filterList(obj){
+            let arr = [];
+            for (var key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    if(typeof(obj[key]) === "object"){
+                        arr.push(obj[key]);
+                    }
+                }
+            }
+            return arr;
+        }
+
         const { data } = await this.query('POST', {
             method: 'getListMemberships', 
             params: {
@@ -66,10 +98,7 @@ module.exports = class abfIntegration{
             id: req.id
         });
         
-        return [data];
-        // if(data.error) return data.error;
-        // if(data.result.lead > 0) return data.result.lead[0];
-        // return data.result.lead;
+        return filterList(data);
     }
     /*======== FIM DA CONFIGURAÇÃO DE LEAD ========*/
 }
