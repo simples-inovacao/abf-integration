@@ -16,5 +16,9 @@
     },
     "bossa": {
 
+    },
+    "cache": {
+        "timeToDestroyCache": 900,
+        "timeToCheckCache": 60
     }
 }

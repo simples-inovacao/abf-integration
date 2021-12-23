@@ -1,5 +1,6 @@
-const { abf: {account_id, account_secret} } = require("../configs/dataConfig.json");
+const { abf: {account_id, account_secret}, tribecca: {request_url, app_key, header} } = require("../configs/dataConfig.json");
 const axios = require("../modules/axios")
+const fetch = require('node-fetch');
 
 module.exports = class abfIntegration{
     constructor(){
@@ -77,6 +78,7 @@ module.exports = class abfIntegration{
         if(data.result === null) return data.error;
         return data.result.updates;
     }
+
     async getListMemberships(req, {emailAddress}, list){
         function filterList(obj){
             let arr = [];
@@ -101,4 +103,17 @@ module.exports = class abfIntegration{
         return filterList(data);
     }
     /*======== FIM DA CONFIGURAÇÃO DE LEAD ========*/
+
+    async getClientsDatabase(){
+        let response = await fetch(request_url, {
+            method: 'GET',
+            headers: { 
+                'Content-Type': 'application/json',
+                'apiKey': app_key
+            }
+        })
+        let data = await response.json()
+
+        return data;
+    }
 }
