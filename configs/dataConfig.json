@@ -1,9 +1,9 @@
 {
     "vtex": {
-        "site": "",
-        "usarname": "",
-        "app_key": "",
-        "app_token": ""
+        "site": "abf.myvtex.com",
+        "usarname": "abf",
+        "app_key": "vtexappkey-abf-ZTYNEV",
+        "app_token": "NXVLXKPKVVESHRKOGAAZRXPNYWDUYOOMIXDVZADTKPVFYLQXOENTNRVQIINAGUMHHRJKOPOGXHOCBJOMGGGTAVYQCMNQMCNPDOYGCGIZQHVGCTOYUAUZOSGMTSIBBXTU"
     },
     "abf": {
         "account_id": "B755F6B4365C256FF6145ED5968C3139",

@@ -4,6 +4,7 @@ const app = require('./modules/express')
 const cache = require("./modules/cache");
 const cacheList = require("./modules/cacheList");
 
+cacheList.list();
+
 app.listen(3000, async() => {
-    cacheList.list();
 })

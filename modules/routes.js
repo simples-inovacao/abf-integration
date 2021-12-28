@@ -1,4 +1,5 @@
 const abf = new(require("../components/abf"))()
+const cache = require('./cache');
 
 module.exports = class routes{
     constructor(app){
@@ -14,6 +15,11 @@ module.exports = class routes{
             let data = await abf.checkifHasOnList(req, lead, list);
             
             res.json(data);
+        })
+
+        this.router.get('/database', async function (req, res) {
+            let c = cache.init();
+            if(c.check('database-tribecca')) return res.json({data: c.get('database-tribecca')});
         })
     }
     
