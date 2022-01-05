@@ -57,12 +57,11 @@ class abfIntegration{
           let data = await addToCart;
           return data;
     	}
-    	
-    	return console.log(obj)
 	
 		let getStatus = await addToCart().then((status) => {
           if(status.status === 200){
           		localStorage.removeItem("plan_only")
+          		localStorage.setItem("associado", JSON.stringify(obj))
         		location.href = "/checkout#/cart";
         	}
 		})
