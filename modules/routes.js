@@ -54,8 +54,25 @@ module.exports = class routes{
             let data = await vtex.masterData().deleteDocument(id, "SI")
             return res.json({data: data});
         })
+        //https://developers.vtex.com/vtex-rest-api/reference/subscriptions-1#patch_api-rns-pub-subscriptions-id-items-itemid
+        /*====== ROTAS ASSINATURAS =====*/
+        this.router.get('/vtex/assinaturas/get', async function (req, res) {
+            const { email } = req.query;
 
-        /*====== ROTAS ... =====*/
+            if(!email) return res.send("Falta o parâmetro email na URL");
+
+            let data = await (await vtex.subscriptions()).get(email)
+            return res.json({data: data});
+        })
+        
+        this.router.get('/vtex/assinaturas/getActives', async function (req, res) {
+            const { email } = req.query;
+
+            if(!email) return res.send("Falta o parâmetro email na URL");
+
+            let data = await (await vtex.subscriptions()).getActives(email)
+            return res.json({data: data});
+        })
     }
     
 }

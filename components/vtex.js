@@ -87,7 +87,114 @@ module.exports = class vtexIntegration{
             scrollDocuments: scrollDocuments,
             searchDocumentByEmail: searchDocumentByEmail,
             addDocument: addDocument,
-            deleteDocument: deleteDocument,
+            deleteDocument: deleteDocument
+        }
+    }
+
+    async subscriptions(){
+        async function getSubscriptions(email){
+            let response = await fetch(`https://${usarname}.vtexcommercestable.com.br/api/rns/pub/subscriptions?customerEmail=${email}&page=1&size=15`, {
+                method: 'GET',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'X-VTEX-API-AppKey': app_key,
+                    'X-VTEX-API-AppToken': app_token
+                }
+            })
+            let data = await response.json()
+    
+            return data;
+        }
+
+        async function getActiveSubscription(email){
+            let data = await getSubscriptions("tsales@simplesinovacao.com");
+            if(!data) return;
+
+            data = data.find(f => f.status === "ACTIVE")||[]
+
+            return data;
+        }
+
+        async function deleteItemFromSubscription(subId, itemId){
+            let response = await fetch(`https://${usarname}.vtexcommercestable.com.br/api/rns/pub/subscriptions/${subId}/items/${itemId}`, {
+                method: 'DELETE',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'X-VTEX-API-AppKey': app_key,
+                    'X-VTEX-API-AppToken': app_token
+                }
+            })
+            let data = await response.json()
+    
+            return data;
+        }
+
+        async function addItemOnSubscription(subId, skuId, quantity){
+            let response = await fetch(`https://${usarname}.vtexcommercestable.com.br/api/rns/pub/subscriptions/${subId}/items`, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'X-VTEX-API-AppKey': app_key,
+                    'X-VTEX-API-AppToken': app_token
+                },
+                body: JSON.stringify({
+                    skuId: skuId,
+                    quantity: quantity
+
+                })
+            })
+            let data = await response.json()
+    
+            return data;
+        }
+
+        async function updateSubscription(data, plan, subId){
+            let bbf = JSON.parse(`{"plan":{"frequency":{"periodicity":"${data.plan.frequency.periodicity}","interval":"${parseInt(data.plan.frequency.interval)}"},"id":"${plan}","purchaseDay":"${data.plan.purchaseDay}"},"shippingAddress":{"addressId":"${data.shippingAddress.addressId}","addressType":"${data.shippingAddress.addressType}"},"purchaseSettings":{"paymentMethod":{"paymentSystem":"${data.purchaseSettings.paymentMethod.paymentSystem}"}}}`);
+
+            let bodyParams = {
+                    id: plan,
+                    plan: {
+                        frequency: {
+                            periodicity: data.plan.frequency.periodicity,
+                            interval: parseInt(data.plan.frequency.interval)
+                        },
+                        purchaseDay: data.plan.purchaseDay,
+                    },
+                    shippingAddress: {
+                        addressId: data.shippingAddress.addressId,
+                        addressType: data.shippingAddress.addressType
+                    },
+                    purchaseSettings: {
+                        paymentMethod: {
+                            paymentSystem: data.purchaseSettings.paymentMethod.paymentSystem,
+                        }
+                    }
+                }
+
+            // return console.log(JSON.stringify(bodyParams))
+
+
+            let response = await fetch(`https://${usarname}.vtexcommercestable.com.br/api/rns/pub/subscriptions/${subId}`, {
+                method: 'PATCH',
+                headers: { 
+                    'Content-Type': 'application/*+json',
+                    'Accept': 'text/plain',
+                    'X-VTEX-API-AppKey': app_key,
+                    'X-VTEX-API-AppToken': app_token
+                },
+                body: JSON.stringify(bbf)
+            })
+            let data2 = await response.json()
+    
+            return data2;
+        }
+
+        return {
+            get: getSubscriptions,
+            getActives: getActiveSubscription,
+            update: updateSubscription,
+            deleteItem: deleteItemFromSubscription,
+            addItem: addItemOnSubscription,
         }
     }
 }
