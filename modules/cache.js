@@ -3,6 +3,7 @@ const abf = new(require("../components/abf"))()
 
 //https://www.npmjs.com/package/node-cache
 const NodeCache = require( "node-cache" );
+const vtex = new(require("../components/vtex"));
 const myCache = new NodeCache( { stdTTL: cache.timeToDestroyCache, checkperiod: cache.timeToCheckCache } ); //600
 
 class cacheSystem{
@@ -23,6 +24,14 @@ class cacheSystem{
         }
     }
 
+    del(key){
+        let v = myCache.del(key);
+
+        if(v !== undefined){
+            return v;
+        }
+    }
+
     on(){
         let self = this;
         myCache.on( "expired", async function( key, value ){
@@ -30,6 +39,10 @@ class cacheSystem{
                 case "database-tribecca":
                     self.set('database-tribecca', await abf.getClientsDatabase())
                     console.log(`[${key}] CACHE RENOVADO`);
+                break;
+                default:
+                    console.log(key, "expirou... Verificando novamente");
+                    await (await vtex.orders()).checkStatus(`${key}`, value);
                 break;
             }
         });
@@ -40,7 +53,8 @@ class cacheSystem{
             set: this.set,
             get: this.get,
             check: this.check,
-            on: this.on
+            on: this.on,
+            delete: this.del
         }
     }
 }

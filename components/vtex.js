@@ -1,5 +1,7 @@
 const { vtex: {usarname, app_key, app_token, site} } = require("../configs/dataConfig.json")
 const fetch = require('node-fetch');
+const cache = require("../modules/cache");
+const abf = new(require("./abf"))();
 
 module.exports = class vtexIntegration{
     masterData(){
@@ -107,10 +109,10 @@ module.exports = class vtexIntegration{
         }
 
         async function getActiveSubscription(email){
-            let data = await getSubscriptions("tsales@simplesinovacao.com");
+            let data = await getSubscriptions(email);
             if(!data) return;
 
-            data = data.find(f => f.status === "ACTIVE")||[]
+            data = data.filter(f => f.status === "ACTIVE")
 
             return data;
         }
@@ -148,53 +150,141 @@ module.exports = class vtexIntegration{
             return data;
         }
 
-        async function updateSubscription(data, plan, subId){
-            let bbf = JSON.parse(`{"plan":{"frequency":{"periodicity":"${data.plan.frequency.periodicity}","interval":"${parseInt(data.plan.frequency.interval)}"},"id":"${plan}","purchaseDay":"${data.plan.purchaseDay}"},"shippingAddress":{"addressId":"${data.shippingAddress.addressId}","addressType":"${data.shippingAddress.addressType}"},"purchaseSettings":{"paymentMethod":{"paymentSystem":"${data.purchaseSettings.paymentMethod.paymentSystem}"}}}`);
-
-            let bodyParams = {
-                    id: plan,
-                    plan: {
-                        frequency: {
-                            periodicity: data.plan.frequency.periodicity,
-                            interval: parseInt(data.plan.frequency.interval)
-                        },
-                        purchaseDay: data.plan.purchaseDay,
-                    },
-                    shippingAddress: {
-                        addressId: data.shippingAddress.addressId,
-                        addressType: data.shippingAddress.addressType
-                    },
-                    purchaseSettings: {
-                        paymentMethod: {
-                            paymentSystem: data.purchaseSettings.paymentMethod.paymentSystem,
-                        }
-                    }
-                }
-
-            // return console.log(JSON.stringify(bodyParams))
-
-
+        async function updateStatusSubscription(subId, status){
             let response = await fetch(`https://${usarname}.vtexcommercestable.com.br/api/rns/pub/subscriptions/${subId}`, {
                 method: 'PATCH',
                 headers: { 
-                    'Content-Type': 'application/*+json',
-                    'Accept': 'text/plain',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
                     'X-VTEX-API-AppKey': app_key,
                     'X-VTEX-API-AppToken': app_token
                 },
-                body: JSON.stringify(bbf)
+                body: JSON.stringify({
+                    status: status
+                })
             })
-            let data2 = await response.json()
+            let data = await response.json()
     
-            return data2;
+            return data;
+        }
+
+        async function cancelPlan(data){
+            let activePlans = await getActiveSubscription(data.associate.vtex_email);
+            let oldPlan = activePlans.find(ap => ap.id === data.planData.id)
+
+            if(oldPlan){
+                if(oldPlan.status !== "ACTIVE") return;
+                let status = await updateStatusSubscription(oldPlan.id, "CANCELED");
+                console.log("Novo status: ",status.status)
+            }
         }
 
         return {
             get: getSubscriptions,
             getActives: getActiveSubscription,
-            update: updateSubscription,
             deleteItem: deleteItemFromSubscription,
             addItem: addItemOnSubscription,
+            cancel: cancelPlan
+        }
+    }
+
+    async orders(){
+        let self = this;
+
+        async function getOrders(){
+            let response = await fetch(`https://${usarname}.vtexcommercestable.com.br/api/oms/pvt/orders?f_creationDate=creationDate%3A%5B2016-01-01T02%3A00%3A00.000Z%20TO%202024-01-01T01%3A59%3A59.999Z%5D&f_hasInputInvoice=false&orderBy=creationDate,desc&per_page=30&utc=-0300`, {
+                method: 'GET',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'X-VTEX-API-AppKey': app_key,
+                    'X-VTEX-API-AppToken': app_token
+                }
+            })
+            let data = await response.json()
+
+            if(data.list) return data.list;
+    
+            return data;
+        }
+
+        async function ordersManager(){
+            let c = cache.init();
+            // if(!c.check('database-tribecca')) return c.set('database-tribecca', await abf.getClientsDatabase())
+
+            let orders = await getOrders()||[];
+                orders = orders.filter(o => o.status !== 'canceled');
+
+            for(let order of orders){
+                const data = {
+                    status: order.status,
+                    statusDescription: order.statusDescription,
+                    orderId: order.orderId,
+                    clientName: order.clientName,
+                    paymentNames: order.paymentNames
+
+                }
+
+                if(!c.check(`order-${order.orderId}`)) {
+                    c.set(`order-${order.orderId}`, data)
+                }
+            }
+        }
+
+        async function getOrder(id){
+            let response = await fetch(`https://${usarname}.vtexcommercestable.com.br/api/oms/pvt/orders/${id}`, {
+                method: 'GET',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'X-VTEX-API-AppKey': app_key,
+                    'X-VTEX-API-AppToken': app_token
+                }
+            })
+            let data = await response.json()
+            
+            return data;
+        }
+
+        async function checkStatus(id, data, req, c){
+
+            //https://help.vtex.com/pt/tutorial/tabela-de-status-de-pedidos-oms--frequentlyAskedQuestions_773
+            let statusToCheck = [
+                "approve-payment",
+                "payment-approved",
+                "ready-for-handling",
+                "start-handling",
+                "handling",
+                "cancel",
+                "canceled"
+            ]
+
+            const {status, clientProfileData} = await getOrder(id);
+
+            let stt = statusToCheck.find(s => s == status);
+
+            // console.log(data.planData)
+
+            if(stt === "cancel" || stt === "canceled"){
+                // ignora
+                c.delete(id) // apaga cache
+            }else if(stt){
+                if(data.hasPlan){
+                    await (await self.subscriptions()).cancel(data) // Cancelar assinatura anterior
+                    // Enviar dados para bossa?
+                    c.delete(id) // apaga cache
+                }else{
+                    // Enviar dados para bossa?
+                    c.delete(id) // apaga cache
+                }
+                
+                await abf.createLeadVtex(req, {firstName:clientProfileData.firstName,lastName:clientProfileData.lastName,emailAddress:data.associate.vtex_email}, 5230840834) // Cria/Atualiza o lead e adiciona a lista
+            }
+        }
+
+        return {
+            get: getOrders,
+            getIndividual: getOrder,
+            check: ordersManager,
+            checkStatus: checkStatus,
         }
     }
 }

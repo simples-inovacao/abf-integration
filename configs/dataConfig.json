@@ -15,10 +15,12 @@
         "header": "apiKey"
     },
     "bossa": {
-
+        "username": "vtex",
+        "password": "JKt%&egFdRtsRD28S",
+        "host": "https://hu47n7gpx2.execute-api.us-east-1.amazonaws.com/v1/vtex"
     },
     "cache": {
-        "timeToDestroyCache": 900,
+        "timeToDestroyCache": 90,
         "timeToCheckCache": 60
     }
 }

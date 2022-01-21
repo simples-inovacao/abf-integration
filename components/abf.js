@@ -56,10 +56,18 @@ module.exports = class abfIntegration{
         }
     }
     /*======== FIM DA CONFIGURAÇÃO DE LEAD ========*/
+    async createLeadVtex(req, lead, list){
+        await this.checkLead(req, lead);
+        let data = await this.checkifHasOnList(req, lead, list);
 
+        return data;
+    }
     /*======== INICIO DA CONFIGURAÇÃO DE LISTA ========*/
     async checkifHasOnList(req, lead, list){
         let userLists = await this.getListMemberships(req, lead, list);
+
+        // if(userLists[1].code === 207) return false;
+        
         let check = userLists.find(l => l.id === list);
         if(check) return {status: false, msg: "O contato já está na lista"};
         return this.addLeadAtList(req, lead, list);
@@ -92,6 +100,8 @@ module.exports = class abfIntegration{
             return arr;
         }
 
+        
+
         const { data } = await this.query('POST', {
             method: 'getListMemberships', 
             params: {
@@ -105,15 +115,19 @@ module.exports = class abfIntegration{
     /*======== FIM DA CONFIGURAÇÃO DE LEAD ========*/
 
     async getClientsDatabase(){
-        let response = await fetch(request_url, {
-            method: 'GET',
-            headers: { 
-                'Content-Type': 'application/json',
-                'apiKey': app_key
-            }
-        })
-        let data = await response.json()
-
-        return data;
+        try {
+            let response = await fetch(request_url, {
+                method: 'GET',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'apiKey': app_key
+                }
+            })
+            let data = await response.json()
+    
+            return data;
+        } catch (error) {
+            return [];
+        }
     }
 }

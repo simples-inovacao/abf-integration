@@ -10,12 +10,9 @@ module.exports = class routes{
 
     routerList(){
         this.router.get('/', async function (req, res) {
-            let lead = {firstName:"Simples",lastName:"Inovação",emailAddress:"testedasimples@yopmail.com"};
-            let list = 5172739074;
-
-            let data = await abf.checkifHasOnList(req, lead, list);
+            // let response = await abf.createLeadVtex(req, {firstName:"Simples",lastName:"Inovação",emailAddress:"testedasimples@yopmail.com"}, 5230840834)
             
-            res.json(data);
+            res.json({status: "salve"});
         })
 
         /*====== ROTAS BANCO TRIBECCA =====*/
@@ -64,7 +61,7 @@ module.exports = class routes{
             let data = await (await vtex.subscriptions()).get(email)
             return res.json({data: data});
         })
-        
+
         this.router.get('/vtex/assinaturas/getActives', async function (req, res) {
             const { email } = req.query;
 
@@ -72,6 +69,21 @@ module.exports = class routes{
 
             let data = await (await vtex.subscriptions()).getActives(email)
             return res.json({data: data});
+        })
+        
+        /*====== ROTAS ORDER PLACED =====*/
+        this.router.post('/vtex/orderplaced/add', async function (req, res) {
+            const { data } = req.body;
+
+            if(!data) return res.json({status: false});
+            
+            let c = cache.init();
+            if(!c.check(`${data.orderId}-01`)) {
+                c.set(`${data.orderId}-01`, data)
+                await (await vtex.orders()).checkStatus(`${data.orderId}-01`, data, req, c);
+            }
+
+            return res.json({status: true});
         })
     }
     
