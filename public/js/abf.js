@@ -99,7 +99,7 @@ class abfIntegration{
 		})
 	}
 	async getUserSubscriptions(email){
-		return await this.query('GET', 'http://localhost:3000/vtex/assinaturas/get?email='+email);
+		return await this.query('GET', 'https://simples.tutoriaiseinformatica.com/vtex/assinaturas/get?email='+email);
 	}
 	escapeRegExp(string) {
 		return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
@@ -259,7 +259,7 @@ class abfIntegration{
 		
 		if(document.body.id !== 'login-auth') return;
 		
-		let database = await this.query('GET', 'http://localhost:3000/database');
+		let database = await this.query('GET', 'https://simples.tutoriaiseinformatica.com/database');
 		
 		toggleOptions(false);
 		
@@ -278,7 +278,7 @@ class abfIntegration{
 		storage = JSON.parse(storage);
 		storage.orderId = location.search.replace("?og=", "");
 		
-		let response = await fetch(`http://localhost:3000/vtex/orderplaced/add`, {
+		let response = await fetch(`https://simples.tutoriaiseinformatica.com/vtex/orderplaced/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
