@@ -93,7 +93,7 @@ class abfIntegration{
 				  }
           		
           		localStorage.setItem("abf_data", JSON.stringify(storage))
-				  NProgress.done()
+				NProgress.done()
         		location.href = "/checkout#/cart";
         	}
 		})
@@ -138,11 +138,12 @@ class abfIntegration{
 		}
 
 		$(".shippingAuthentication input[type=text]").after(select);
+		$("select").show();
 
-		$('select').niceSelect();
-		$('.nice-select').change((e) => {
-			e.preventDefault();
-		});
+		// $('select').niceSelect();
+		// $('.nice-select').change((e) => {
+		// 	e.preventDefault();
+		// });
 	}
 	async authPage(){
 		let self = this,
@@ -165,6 +166,7 @@ class abfIntegration{
 				$(".btnAssociates button:first-child").hide();
 				$(".btnAssociates button:last-child").show();
 				toggleOptions(false);
+				$("select").remove();
 			}else{
 				if(search.SituationABF !== "Ativa" && search.Status !== "Associado"){
 					throwError("Sua situação de associado é: "+search.SituationABF);
@@ -192,7 +194,11 @@ class abfIntegration{
 							assinaturas = data.filter(f => f.status === "ACTIVE");
 							
 						if(assinaturas.length <=0 ){
-							if(assinaturas.length <= 0) return await self.addTopToCart(storage.sku_id, search);
+							if(assinaturas.length <= 0) {
+								$(".btnAssociates button:first-child").click(async () => {
+									await self.addTopToCart(storage.sku_id, search);
+								})
+							}
 						}else{
 							let pUpgrade = await self.query('GET', '/api/catalog_system/pub/products/search?fq=skuId:'+storage.sku_id);
 							
@@ -265,8 +271,21 @@ class abfIntegration{
 		
 		$(".shippingAuthentication input[type=text]").mask("99.999.999/9999-99");
 		//$("#cpfcnpj").mask("999.999.999-99");
+
+		var typingTimer;                //timer identifier
+		var doneTypingInterval = 2000;  //time in ms (5 seconds)
 		
-		$(".shippingAuthentication input[type=text]").on("keyup",({target: value}) => validateData(value, database))
+		$(".shippingAuthentication input[type=text]").on("keyup",({target: value}) => {
+			
+			if ($('.shippingAuthentication input[type=text]').val()) {
+				NProgress.start()
+				clearTimeout(typingTimer);
+				typingTimer = setTimeout(() => {
+					validateData(value, database)
+					NProgress.done();
+				}, doneTypingInterval);
+			}
+		})
 		
 	}
 	async orderPlacedSend(){
