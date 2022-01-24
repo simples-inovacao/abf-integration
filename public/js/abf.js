@@ -160,6 +160,7 @@ class abfIntegration{
 		})
 		
 		async function validateData({value}, {data}){
+			if(value === "") return throwError("Insira o seu CNPJ");
 			let search = data.find(d => d.Document === value);
 			if(!search){
 				throwError("Você não é um associado");
