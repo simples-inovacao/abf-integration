@@ -20,7 +20,7 @@
         "host": "https://hu47n7gpx2.execute-api.us-east-1.amazonaws.com/v1/vtex"
     },
     "cache": {
-        "timeToDestroyCache": 90,
+        "timeToDestroyCache": 900,
         "timeToCheckCache": 60
     }
 }
