@@ -80,17 +80,26 @@ class abfIntegration{
     	
 		await vtexjs.checkout.removeAllItems();
 		
-		let getStatus = await addToCart(q).then((status) => {
+		let getStatus = await addToCart(q).then(async (status) => {
           if(status.status === 200){
           		let storage =  JSON.parse(localStorage.getItem("abf_data"));
           		search.vtex_email = auth;
           		search.vtex_franquia_selected = $("select").val(),
           		storage.associate = search;
           		storage.associate.franquia;
-				  if(assinatura){
-					  storage.hasPlan = true;
-					  storage.planData = assinatura;
-				  }
+
+				if(assinatura){
+					storage.hasPlan = true;
+					storage.planData = assinatura;
+				}
+
+				if(storage.only === "Associado"){
+					const { orderForm} = await vtexjs.checkout.getOrderForm();
+					var marketingData = orderForm.marketingData; 
+						marketingData = {'utmCampaign': 'associado'}; 
+					await vtexjs.checkout.sendAttachment('marketingData', marketingData); 
+				}
+				
           		
           		localStorage.setItem("abf_data", JSON.stringify(storage))
 				NProgress.done()
@@ -108,73 +117,58 @@ class abfIntegration{
 		return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
 	}
 	async checkVal(val){
-		let arr = [];
+		// let arr = [];
 
-		if(val.indexOf(";") !== -1){
-			val = this.replaceAll(val, '"', "");
-			val = val.split("; ");
+		// if(val.indexOf(";") !== -1){
+		// 	val = this.replaceAll(val, '"', "");
+		// 	val = val.split("; ");
 
-			if(typeof val === "object"){
-				for(let item of val){
-					arr.push(item);
-				}
-			}
-		}else{
-			arr.push(val);
-		}
-		
-		$('select').remove();
-		let select = document.createElement("select");
-			select.addEventListener("change", (e) => {
-				e.preventDefault();
-			})
+		// 	if(typeof val === "object"){
+		// 		for(let item of val){
+		// 			arr.push(item);
+		// 		}
+		// 	}
+		// }else{
+		// 	arr.push(val);
+		// }
 
-		for(let item of arr){
-			let opt = document.createElement("option");
-				opt.value = item;
-				opt.innerText = item;
-
-			select.append(opt)
-		}
-
-		$(".shippingAuthentication input[type=text]").after(select);
-		$("select").show();
-
-		// $('select').niceSelect();
-		// $('.nice-select').change((e) => {
-		// 	e.preventDefault();
-		// });
-	}
-	async authPage(){
 		let self = this,
 			user = await this.checkUserLogged();
 			
 		if(!user) return location.href = "/login";
 
-
-		$(".btnAssociates button:first-child").click(() => {
-			if($(".shippingAuthentication input[type=text]").val() === ''){
-				$(".shippingAuthentication input[type=text]").addClass("is-invalid");
-				throwError("Preencha o CNPJ");
-			}
-		})
-		
-		async function validateData({value}, {data}){
-			if(value === "") return throwError("Insira o seu CNPJ");
-			let search = data.find(d => d.Document === value);
-			if(!search){
-				throwError("Você não é um associado");
-				$(".btnAssociates button:first-child").hide();
-				$(".btnAssociates button:last-child").show();
-				toggleOptions(false);
-				$("select").remove();
+		function throwError(msg = null){
+			if(!document.querySelector('.has-error')){
+				$(".shippingAuthentication input[type=text]").after(`<span class="has-error">${msg}</span>`)
 			}else{
-				if(search.SituationABF !== "Ativa" && search.Status !== "Associado"){
-					throwError("Sua situação de associado é: "+search.SituationABF);
-					$(".btnAssociates button:first-child").hide();
-					$(".btnAssociates button:last-child").show();
-					toggleOptions(false);
+				if(msg){
+					if(!$(".shippingAuthentication input[type=text]").hasClass("is-invalid")){
+						$(".shippingAuthentication input[type=text]").addClass("is-invalid")
+					}
+					$("span.has-error").text(msg);
 				}else{
+					$(".shippingAuthentication input[type=text]").removeClass("is-invalid")
+					$("span.has-error").empty();
+				}
+			}
+		}
+
+		val = val.filter(a => a.SituationABF === "Ativa" && a.Status === "Associado");
+
+		if(val.length <=0){
+			throwError("Sua situação de associado é inativa");
+			$(".btnAssociates button:first-child").hide();
+			$(".btnAssociates button:last-child").show();
+			toggleOptions(false);
+			$("select").remove();
+		}else{
+			throwError("");
+			$('select').remove();
+			let select = document.createElement("select");
+				select.addEventListener("change", async(e) => {
+					e.preventDefault();
+					let search = val.find(f => f.Id === parseInt(e.target.value))
+
 					let storage = localStorage.getItem("abf_data")
 					if(!storage){
 						swal.fire({icon: 'error', text: 'Esse produto é exclusivo para associados', timer: 1500})
@@ -182,12 +176,10 @@ class abfIntegration{
 						$(".btnAssociates button:last-child").hide();
 					}else{
 						storage = JSON.parse(storage);
-						// console.log(storage.sku_id)
+
 						throwError("");
 						$(".btnAssociates button:first-child").show();
 						$(".btnAssociates button:last-child").hide();
-					
-						await self.checkVal(search.TradeName)
 						
 						let { data } = await self.getUserSubscriptions(user);
 						
@@ -228,13 +220,46 @@ class abfIntegration{
 							  }
 							})
 						}
-
-						// await self.addTopToCart(storage.plan_sku, search)
 					}
 					
-				}
-				
-				// console.log(search)
+				})
+
+			for(let item of val){
+				let opt = document.createElement("option");
+					opt.value = item.Id;
+					opt.innerText = item.TradeName;
+
+				select.append(opt)
+			}
+
+			$(".shippingAuthentication input[type=text]").after(select);
+			$("select").show();
+		}
+		
+	}
+	async authPage(){
+		let self = this;
+
+		$(".btnAssociates button:first-child").click(() => {
+			if($(".shippingAuthentication input[type=text]").val() === ''){
+				$(".shippingAuthentication input[type=text]").addClass("is-invalid");
+				throwError("Preencha o CNPJ");
+			}
+		})
+		
+		async function validateData({value}, {data}){
+			if(value === "") return throwError("Insira o seu CNPJ");
+			
+			let search = data.filter(d => d.Document === value);
+			
+			if(search.length <= 0){
+				throwError("Você não é um associado");
+				$(".btnAssociates button:first-child").hide();
+				$(".btnAssociates button:last-child").show();
+				toggleOptions(false);
+				$("select").remove();
+			}else{
+				return await self.checkVal(search)
 			}
 		}
 		
@@ -282,8 +307,11 @@ class abfIntegration{
 				NProgress.start()
 				clearTimeout(typingTimer);
 				typingTimer = setTimeout(() => {
-					validateData(value, database)
-					NProgress.done();
+					console.log(value.value.length)
+					if(value.value.length >= 18){
+						validateData(value, database)
+						NProgress.done();
+					}
 				}, doneTypingInterval);
 			}
 		})
@@ -325,3 +353,4 @@ window.addEventListener("load", () => setTimeout(() => new abfIntegration().init
 window.addEventListener("load", () => setTimeout(() => new abfIntegration().orderPlacedSend(), 500))
 //CNPJ: 32.905.377/0001-86
 //CNPJ: 11137051000186 MULTI
+//CNPJ: 01.404.158/0001-90

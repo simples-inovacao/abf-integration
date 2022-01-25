@@ -2,12 +2,15 @@ const { bossa: {host, username, password} } = require("../configs/dataConfig.jso
 const axios = require("../modules/axios")
 
 module.exports = class bossaIntegration{
-    async query(url, method, params){
+    async query(url, method, params = null){
         let req = {
             method: method,
-            url: url,
-            data: params
+            url: url
         };
+
+        if(params){
+            req.data = params;
+        }
 
         if(this.token){
             req.headers = {
@@ -49,7 +52,7 @@ module.exports = class bossaIntegration{
 
     async searchUser(id){
         try {
-            let response = await this.query(host+'/find/parentOriginCode', 'POST', id);
+            let response = await this.query(host+'/find/'+id, 'POST');
             
             return response.data;
         } catch (error) {
