@@ -68,7 +68,7 @@ class abfIntegration{
 		let obj = {
 			sku: id,
 			associado: true,
-			cnpj: search.Document,
+			cnpj: search?.Document,
 			franquia: $("select").val(),
 		}
 		
@@ -83,26 +83,25 @@ class abfIntegration{
 		let getStatus = await addToCart(q).then(async (status) => {
           if(status.status === 200){
           		let storage =  JSON.parse(localStorage.getItem("abf_data"));
-          		search.vtex_email = auth;
-          		search.vtex_franquia_selected = $("select").val(),
-          		storage.associate = search;
-          		storage.associate.franquia;
+          		if(search){
+					search.vtex_email = auth;
+					search.vtex_franquia_selected = $("select").val(),
+					storage.associate = search;
+
+					const orderForm = await vtexjs.checkout.getOrderForm();
+					var marketingData = orderForm.marketingData; 
+						marketingData = {'utmCampaign': 'associado'}; 
+					await vtexjs.checkout.sendAttachment('marketingData', marketingData); 
+				  }
 
 				if(assinatura){
 					storage.hasPlan = true;
 					storage.planData = assinatura;
 				}
-
-				if(storage.only === "Associado"){
-					const { orderForm} = await vtexjs.checkout.getOrderForm();
-					var marketingData = orderForm.marketingData; 
-						marketingData = {'utmCampaign': 'associado'}; 
-					await vtexjs.checkout.sendAttachment('marketingData', marketingData); 
-				}
-				
           		
           		localStorage.setItem("abf_data", JSON.stringify(storage))
 				NProgress.done()
+				
         		location.href = "/checkout#/cart";
         	}
 		})
@@ -253,12 +252,35 @@ class abfIntegration{
 			let search = data.filter(d => d.Document === value);
 			
 			if(search.length <= 0){
+				let storage =  JSON.parse(localStorage.getItem("abf_data"));
+
 				throwError("Você não é um associado");
 				$(".btnAssociates button:first-child").hide();
 				$(".btnAssociates button:last-child").show();
 				toggleOptions(false);
 				$("select").remove();
+
+				$(".btnAssociates button:last-child").click(async (e) => {
+					if(storage.only === "Ambos"){
+						e.preventDefault();
+						return await self.addTopToCart(storage.sku_id);
+					}
+
+					e.preventDefault();
+
+					Swal.fire({
+						title: 'Ops',
+						icon: 'error',
+						text:'Este produto é apenas para associado',
+						showConfirmButton: false,
+						showCancelButton: true,
+						cancelButtonText:'Voltar',
+					  }).then((result) => {
+						result.dismiss === Swal.DismissReason.cancel
+					  })
+				})
 			}else{
+				$(".btnAssociates button:last-child").unbind("click");
 				return await self.checkVal(search)
 			}
 		}
@@ -307,7 +329,7 @@ class abfIntegration{
 				NProgress.start()
 				clearTimeout(typingTimer);
 				typingTimer = setTimeout(() => {
-					console.log(value.value.length)
+					// console.log(value.value.length)
 					if(value.value.length >= 18){
 						validateData(value, database)
 						NProgress.done();
