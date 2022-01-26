@@ -152,6 +152,8 @@ class abfIntegration{
 			}
 		}
 
+		if(!$("select").val()) return throwError("Selecione uma franquia");
+
 		val = val.filter(a => a.SituationABF === "Ativa" && a.Status === "Associado");
 
 		if(val.length <=0){
@@ -239,6 +241,7 @@ class abfIntegration{
 
 				select.append(opt)
 			}
+			
 
 			$(".shippingAuthentication input[type=text]").after(select);
 			$("select").show();
