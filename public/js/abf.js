@@ -243,9 +243,6 @@ class abfIntegration{
 
 			$(".shippingAuthentication input[type=text]").after(select);
 			$("select").show();
-			
-			if(!$("select").val()) return throwError("Selecione uma franquia");
-			throwError("")
 		}
 		
 	}
@@ -336,7 +333,9 @@ class abfIntegration{
 				let val = $(".shippingAuthentication input[type=text]").val();
 
 				if(val.length >= 18){
+					if(!$("select").val()) return throwError("Selecione uma franquia");
 					validateData({value: val}, database)
+					throwError("");
 				}
 			}
 		})
