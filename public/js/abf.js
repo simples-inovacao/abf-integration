@@ -277,11 +277,11 @@ class abfIntegration{
 			}else{
 				if(msg){
 					if(!$(".shippingAuthentication input[type=text]").hasClass("is-invalid")){
-						$(".shippingAuthentication input[type=text]").addClass("is-invalid")
+						$(".shippingAuthentication input[type=text], select").addClass("is-invalid")
 					}
 					$("span.has-error").text(msg);
 				}else{
-					$(".shippingAuthentication input[type=text]").removeClass("is-invalid")
+					$(".shippingAuthentication input[type=text], select").removeClass("is-invalid")
 					$("span.has-error").empty();
 				}
 			}
