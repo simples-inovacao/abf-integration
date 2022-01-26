@@ -2,6 +2,8 @@ const abf = new(require("../components/abf"))()
 const cache = require('./cache');
 const vtex = new(require('../components/vtex'))()
 
+let database = [];
+
 module.exports = class routes{
     constructor(app){
         this.router = app;
@@ -20,7 +22,7 @@ module.exports = class routes{
             // let c = cache.init();
             // if(c.check('database-tribecca')) return res.json({data: c.get('database-tribecca')});
 
-            let database = await abf.getClientsDatabase();
+            database = await abf.getClientsDatabase();
             return res.json({data: database})
         })
 
