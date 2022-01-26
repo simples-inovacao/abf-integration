@@ -9,7 +9,7 @@ async function list(){
             if(!c.check('database-tribecca')) return c.set('database-tribecca', database)
     }
 
-    databaseCache();
+    // databaseCache();
     
     cache.on();
 }

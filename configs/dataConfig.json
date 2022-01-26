@@ -17,7 +17,13 @@
     "bossa": {
         "username": "vtex",
         "password": "JKt%&egFdRtsRD28S",
-        "host": "https://hu47n7gpx2.execute-api.us-east-1.amazonaws.com/v1/vtex"
+        "host": "https://hu47n7gpx2.execute-api.us-east-1.amazonaws.com/v1/vtex",
+        "parentOriginCode": "110",
+        "planos": {
+            "vtex.subscription.plano-gratuito": "38",
+            "vtex.subscription.plano-basico": "39",
+            "vtex.subscription.plano-premium": "40"
+        }
     },
     "cache": {
         "timeToDestroyCache": 900,
