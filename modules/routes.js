@@ -11,6 +11,8 @@ module.exports = class routes{
     }
 
     routerList(){
+        database = await abf.getClientsDatabase();
+
         this.router.get('/', async function (req, res) {
             // let response = await abf.createLeadVtex(req, {firstName:"Simples",lastName:"Inovação",emailAddress:"testedasimples@yopmail.com"}, 5230840834)
             
@@ -21,8 +23,7 @@ module.exports = class routes{
         this.router.get('/database', async function (req, res) {
             // let c = cache.init();
             // if(c.check('database-tribecca')) return res.json({data: c.get('database-tribecca')});
-
-            database = await abf.getClientsDatabase();
+            
             return res.json({data: database})
         })
 
