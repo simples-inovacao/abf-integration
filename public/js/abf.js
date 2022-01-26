@@ -318,7 +318,7 @@ class abfIntegration{
 					throwError("");
 					validateData(value, database)
 				}else{
-					throwError("Digite um CNPJ válido");
+					// throwError("Digite um 'CNPJ 'válido");
 				}
 			}
 		})
