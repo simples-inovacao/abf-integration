@@ -10,7 +10,7 @@ module.exports = class routes{
         this.routerList();
     }
 
-    routerList(){
+    async routerList(){
         database = await abf.getClientsDatabase();
 
         this.router.get('/', async function (req, res) {
