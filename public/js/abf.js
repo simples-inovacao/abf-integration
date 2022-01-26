@@ -308,15 +308,18 @@ class abfIntegration{
 		
 		$(".shippingAuthentication input[type=text]").on("keyup",({target: value}) => {
 			if ($('.shippingAuthentication input[type=text]').val()) {
-				NProgress.start()
-				clearTimeout(typingTimer);
-				typingTimer = setTimeout(() => {
-					// console.log(value.value.length)
-					if(value.value.length >= 18){
-						validateData(value, database)
-						NProgress.done();
-					}
-				}, doneTypingInterval);
+				// clearTimeout(typingTimer);
+				// typingTimer = setTimeout(() => {
+				// 	// console.log(value.value.length)
+					
+				// }, doneTypingInterval);
+
+				if(value.value.length >= 18){
+					throwError("");
+					validateData(value, database)
+				}else{
+					throwError("Digite um CNPJ válido");
+				}
 			}
 		})
 
@@ -364,6 +367,10 @@ class abfIntegration{
 			  }).then((result) => {
 				result.dismiss === Swal.DismissReason.cancel
 			  })
+		})
+
+		$(".formAuthentication").on("submit", (e) => {
+			e.preventDefault();
 		})
 		
 	}
