@@ -343,10 +343,10 @@ class abfIntegration{
 			$(".btnAssociates button:first-child").hide();
 			$(".btnAssociates button:last-child").hide();
 
-			if($(".shippingAuthentication input[type=text]").val() === ''){
-				$(".shippingAuthentication input[type=text]").addClass("is-invalid");
-				throwError("Preencha o CNPJ");
-			}
+			// if($(".shippingAuthentication input[type=text]").val() === ''){
+			// 	$(".shippingAuthentication input[type=text]").addClass("is-invalid");
+			// 	throwError("Preencha o CNPJ");
+			// }
 		})
 
 		$(".btnAssociates button:last-child").click(async (e) => {
