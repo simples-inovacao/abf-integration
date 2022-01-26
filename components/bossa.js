@@ -46,7 +46,7 @@ module.exports = class bossaIntegration{
 
             return response.data;
         } catch (error) {
-            console.log(error.data)
+            console.log(error)
         }
     }
 

@@ -13,17 +13,17 @@ app.listen(3000, async() => {
 
     // await (await vtex.orders()).check()
 
-    let auth = await bossa.auth();
+    // let auth = await bossa.auth();
     // let insert = await bossa.createUser({
     //     "parentOriginCode": 110,
-    //     "name": "Teste da simples",
-    //     "email": "testedasimplesssss@yopmail.com",
+    //     "name": "SUporte TI",
+    //     "email": "suportedeTI@yopmail.com",
     //     "phone": "(11) 99999-9999",
     //     "cpf": "043.530.740-16",
-    //     "idGroups": 1
+    //     "idGroups": 99
     // })
 
-    // let search = await bossa.searchUser(2754)
+    // let search = await bossa.searchUser(110)
 
-    // console.log(insert||search)
+    // console.log(search)
 })

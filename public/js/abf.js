@@ -177,8 +177,9 @@ class abfIntegration{
 						storage = JSON.parse(storage);
 
 						throwError("");
-						$(".btnAssociates button:first-child").show();
+						$(".btnAssociates button:first-child").hide();
 						$(".btnAssociates button:last-child").hide();
+						$(".shippingAuthentication > button").show();
 						
 						let { data } = await self.getUserSubscriptions(user);
 						
@@ -187,7 +188,7 @@ class abfIntegration{
 							
 						if(assinaturas.length <=0 ){
 							if(assinaturas.length <= 0) {
-								$(".btnAssociates button:first-child").click(async () => {
+								$(".shippingAuthentication > button").click(async () => {
 									await self.addTopToCart(storage.sku_id, search);
 								})
 							}
@@ -223,6 +224,14 @@ class abfIntegration{
 					
 				})
 
+			let optD = document.createElement("option");
+				optD.value = "";
+				optD.disabled = true;
+				optD.selected = true;
+				optD.innerText = "Selecione";
+
+			select.append(optD)
+
 			for(let item of val){
 				let opt = document.createElement("option");
 					opt.value = item.Id;
@@ -238,13 +247,6 @@ class abfIntegration{
 	}
 	async authPage(){
 		let self = this;
-
-		$(".btnAssociates button:first-child").click(() => {
-			if($(".shippingAuthentication input[type=text]").val() === ''){
-				$(".shippingAuthentication input[type=text]").addClass("is-invalid");
-				throwError("Preencha o CNPJ");
-			}
-		})
 		
 		async function validateData({value}, {data}){
 			if(value === "") return throwError("Insira o seu CNPJ");
@@ -256,29 +258,10 @@ class abfIntegration{
 
 				throwError("Você não é um associado");
 				$(".btnAssociates button:first-child").hide();
+				$(".shippingAuthentication > button").hide();
 				$(".btnAssociates button:last-child").show();
 				toggleOptions(false);
 				$("select").remove();
-
-				$(".btnAssociates button:last-child").click(async (e) => {
-					if(storage.only === "Ambos"){
-						e.preventDefault();
-						return await self.addTopToCart(storage.sku_id);
-					}
-
-					e.preventDefault();
-
-					Swal.fire({
-						title: 'Ops',
-						icon: 'error',
-						text:'Este produto é apenas para associado',
-						showConfirmButton: false,
-						showCancelButton: true,
-						cancelButtonText:'Voltar',
-					  }).then((result) => {
-						result.dismiss === Swal.DismissReason.cancel
-					  })
-				})
 			}else{
 				$(".btnAssociates button:last-child").unbind("click");
 				return await self.checkVal(search)
@@ -324,7 +307,6 @@ class abfIntegration{
 		var doneTypingInterval = 2000;  //time in ms (5 seconds)
 		
 		$(".shippingAuthentication input[type=text]").on("keyup",({target: value}) => {
-			
 			if ($('.shippingAuthentication input[type=text]').val()) {
 				NProgress.start()
 				clearTimeout(typingTimer);
@@ -336,6 +318,52 @@ class abfIntegration{
 					}
 				}, doneTypingInterval);
 			}
+		})
+
+		$(".shippingAuthentication > button").click(() => {
+			if($(".shippingAuthentication input[type=text]").val() === ''){
+				$("select").remove()
+				$(".shippingAuthentication input[type=text]").addClass("is-invalid");
+				throwError("Preencha o CNPJ");
+			}else{
+				let val = $(".shippingAuthentication input[type=text]").val();
+
+				if(val.length >= 18){
+					validateData({value: val}, database)
+				}
+			}
+		})
+
+		$(".btnAssociates button:first-child").click(() => {
+			$(".shippingAuthentication input[type=text]").show();
+			$("button").eq(0).show();
+			$(".btnAssociates button:first-child").hide();
+			$(".btnAssociates button:last-child").hide();
+
+			if($(".shippingAuthentication input[type=text]").val() === ''){
+				$(".shippingAuthentication input[type=text]").addClass("is-invalid");
+				throwError("Preencha o CNPJ");
+			}
+		})
+
+		$(".btnAssociates button:last-child").click(async (e) => {
+			let storage =  JSON.parse(localStorage.getItem("abf_data"));
+			e.preventDefault();
+
+			if(storage.only === "Ambos"){
+				return await self.addTopToCart(storage.sku_id);
+			}
+
+			Swal.fire({
+				title: 'Ops',
+				icon: 'error',
+				text:'Este produto é apenas para associado',
+				showConfirmButton: false,
+				showCancelButton: true,
+				cancelButtonText:'Voltar',
+			  }).then((result) => {
+				result.dismiss === Swal.DismissReason.cancel
+			  })
 		})
 		
 	}
