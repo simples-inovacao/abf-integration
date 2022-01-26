@@ -326,8 +326,8 @@ class abfIntegration{
 		$(".shippingAuthentication > button").click(() => {
 			if($(".shippingAuthentication input[type=text]").val() === ''){
 				$("select").remove()
-				$(".shippingAuthentication input[type=text]").addClass("is-invalid");
-				throwError("Preencha o CNPJ");
+				// $(".shippingAuthentication input[type=text]").addClass("is-invalid");
+				// throwError("Preencha o CNPJ");
 			}else{
 				let val = $(".shippingAuthentication input[type=text]").val();
 
