@@ -349,7 +349,7 @@ class abfIntegration{
 			// }
 		})
 
-		$(".btnAssociates button:last-child").click(async (e) => {
+		$(".btnAssociates button").eq(1).click(async (e) => {
 			let storage =  JSON.parse(localStorage.getItem("abf_data"));
 			e.preventDefault();
 
