@@ -267,7 +267,7 @@ module.exports = class vtexIntegration{
             if(stt === "cancel" || stt === "canceled"){
                 // ignora
                 c.delete(id) // apaga cache
-            }else if(stt){
+            }else if(stt && stt !== "payment-pending"){
                 if(data.hasPlan){
                     await (await self.subscriptions()).cancel(data) // Cancelar assinatura anterior
                     // Enviar dados para bossa?
