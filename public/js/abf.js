@@ -241,7 +241,8 @@ class abfIntegration{
 		
 		async function validateData({value}){
 			if(value === "") return throwError("Insira o seu CNPJ");
-			const { data } = await this.query('GET', 'https://simples.tutoriaiseinformatica.com/database?doc='+value);
+			const { data } = await self.query('GET', 'https://simples.tutoriaiseinformatica.com/database?doc='+value);
+			console.log(data)
 			let search = data.filter(d => d.Document === value);
 			
 			if(search.length <= 0){
