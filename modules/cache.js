@@ -44,8 +44,8 @@ class cacheSystem{
                 break;
                 default:
                     console.log(key, "CACHE EXPIRADO - RENOVANDO");
-                    self.set(key, value)
                     await (await vtex.orders()).checkStatus(`${key}`, value);
+                    self.set(key, value)
                 break;
             }
         });
