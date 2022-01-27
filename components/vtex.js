@@ -275,7 +275,7 @@ module.exports = class vtexIntegration{
                 }
             }
 
-            await abf.createLeadVtex(req, {firstName:clientProfileData.firstName,lastName:clientProfileData.lastName,emailAddress:data.associate.vtex_email}, 5230840834) // Cria/Atualiza o lead e adiciona a lista
+            await abf.createLeadVtex(req, {firstName:clientProfileData.firstName,lastName:clientProfileData.lastName,emailAddress:data.associate.vtex_email}, data.crm_id) // Cria/Atualiza o lead e adiciona a lista
         }
 
         return {

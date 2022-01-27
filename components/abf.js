@@ -26,8 +26,8 @@ module.exports = class abfIntegration{
             },
             id: req.id
         });
-        console.log("lead criado?")
-        console.log(data)
+        // console.log("lead criado?")
+        // console.log(data)
         if(data.error.length > 0) return data.error;
         if(data.result.creates.length > 0) return data.result.creates;
     }
@@ -51,11 +51,11 @@ module.exports = class abfIntegration{
         let response = await this.getLead(req, lead);
 
         if(response.length <= 0){
-            console.log("não tem lead, criando...")
+            // console.log("não tem lead, criando...")
             return await this.createLead(req, lead);
         }else{
-            console.log(response);
-            console.log("tem lead... atualizar")
+            // console.log(response);
+            // console.log("tem lead... atualizar")
             return response;
         }
     }
