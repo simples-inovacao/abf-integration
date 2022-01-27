@@ -63,7 +63,7 @@ module.exports = class abfIntegration{
 
         console.log("status", stt)
 
-        if(stt === "cancel" || stt === "canceled"){
+        if(stt === "cancel" || stt === "canceled" || stt == "payment-pending"){
             console.log("Aguardando aprovação para inserir na lista")
         }else{
             

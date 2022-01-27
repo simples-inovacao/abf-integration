@@ -254,7 +254,8 @@ module.exports = class vtexIntegration{
                 "start-handling",
                 "handling",
                 "cancel",
-                "canceled"
+                "canceled",
+                "payment-pending"
             ]
 
             const {status, clientProfileData} = await getOrder(id);
