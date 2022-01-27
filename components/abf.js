@@ -54,6 +54,7 @@ module.exports = class abfIntegration{
             console.log("não tem lead, criando...")
             return await this.createLead(req, lead);
         }else{
+            console.log(response);
             console.log("tem lead... atualizar")
             return response;
         }
