@@ -75,10 +75,11 @@ module.exports = class abfIntegration{
         
         let check = userLists.find(l => l.id === list);
         if(check) return {status: false, msg: "O contato já está na lista"};
-        return this.addLeadAtList(req, lead, list);
+        return await this.addLeadAtList(req, lead, list);
     }
 
     async addLeadAtList(req, lead, list){
+        console.log(list)
         const { emailAddress } = lead;
         const { data } = await this.query('POST', {
             method: 'addListMemberEmailAddress', 
