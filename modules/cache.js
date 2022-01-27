@@ -28,6 +28,7 @@ class cacheSystem{
         let v = myCache.del(key);
 
         if(v !== undefined){
+            console.log(`[${key}] CACHE DELETADO`);
             return v;
         }
     }

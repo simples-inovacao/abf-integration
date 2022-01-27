@@ -386,7 +386,7 @@ class abfIntegration{
             
         let data = await response.json()
 		
-		localStorage.removeItem("abf_data");
+		// localStorage.removeItem("abf_data");
 		
 		console.log(data)
 		
