@@ -4,7 +4,7 @@ const abf = new(require("../components/abf"))()
 //https://www.npmjs.com/package/node-cache
 const NodeCache = require( "node-cache" );
 const vtex = new(require("../components/vtex"));
-const myCache = new NodeCache( { stdTTL: cache.timeToDestroyCache, checkperiod: cache.timeToCheckCache } ); //600
+const myCache = new NodeCache( { stdTTL: cache.timeToDestroyCache, checkperiod: cache.timeToCheckCache, deleteOnExpire: false } ); //600
 
 class cacheSystem{
     set(key, obj){
@@ -44,8 +44,8 @@ class cacheSystem{
                 break;
                 default:
                     console.log(key, "CACHE EXPIRADO - RENOVANDO");
+                    myCache.set(key, value)
                     await (await vtex.orders()).checkStatus(`${key}`, value);
-                    self.set(key, value)
                 break;
             }
         });

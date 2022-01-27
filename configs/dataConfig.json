@@ -29,7 +29,7 @@
         }
     },
     "cache": {
-        "timeToDestroyCache": 61,
-        "timeToCheckCache": 60
+        "timeToDestroyCache": 60,
+        "timeToCheckCache": 30
     }
 }

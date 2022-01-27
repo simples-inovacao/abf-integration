@@ -81,9 +81,9 @@ module.exports = class bossaIntegration{
         }
 
         async function findUser(email){
-            const { user } = await self.searchUser(parentOriginCode);
+            const data = await self.searchUser(parentOriginCode);
 
-            return user.find(u => u.email === email);
+            return data.user[0].find(u => u.email === email);
         }
 
         async function changeUserPlan(data){
