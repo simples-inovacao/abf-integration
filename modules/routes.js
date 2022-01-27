@@ -8,8 +8,8 @@ module.exports = class routes{
     constructor(app){
         this.router = app;
         this.routerList();
-        let c = cache.init();
-            c.set("teste", {oba: "oba"})
+        // let c = cache.init();
+        //     c.set("teste", {oba: "oba"})
     }
 
     routerList(){
