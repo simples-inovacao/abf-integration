@@ -78,6 +78,15 @@ module.exports = class routes{
             let data = await (await vtex.subscriptions()).getActives(email)
             return res.json({data: data});
         })
+
+        this.router.post('/automation/list/add', async function (req, res) {
+            const { id, data } = req.body;
+
+            let c = cache.init();
+            await (await vtex.orders()).checkStatus(id, data, req, c);
+
+            res.json({status: "ok"})
+        })
         
         /*====== ROTAS ORDER PLACED =====*/
         this.router.post('/vtex/orderplaced/add', async function (req, res) {

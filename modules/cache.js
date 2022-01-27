@@ -1,8 +1,12 @@
 const { cache } = require("../configs/dataConfig.json");
 const abf = new(require("../components/abf"))()
+const fetch = require('node-fetch');
+
+const axios = require('axios').default;
 
 //https://www.npmjs.com/package/node-cache
 const NodeCache = require( "node-cache" );
+const req = require("express/lib/request");
 const vtex = new(require("../components/vtex"));
 const myCache = new NodeCache( { stdTTL: cache.timeToDestroyCache, checkperiod: cache.timeToCheckCache, deleteOnExpire: false } ); //600
 
@@ -45,7 +49,11 @@ class cacheSystem{
                 default:
                     console.log(key, "CACHE EXPIRADO - RENOVANDO");
                     myCache.set(key, value)
-                    await (await vtex.orders()).checkStatus(`${key}`, value);
+                    let response = await axios.post('http://localhost:3000/automation/list/add', {
+                        id: {id: key},
+                        data: value
+                    })
+                    console.log(response)
                 break;
             }
         });

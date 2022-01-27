@@ -61,12 +61,12 @@ module.exports = class abfIntegration{
     async createLeadVtex(req, lead, list, stt){
         await this.checkLead(req, lead);
 
-        console.log("status", stt)
-
+        
         if(stt === "cancel" || stt === "canceled" || stt == "payment-pending"){
             console.log("Aguardando aprovação para inserir na lista")
         }else{
             
+            console.log("status", stt)
             let data = await this.checkifHasOnList(req, lead, list);
             console.log("Aprovado, inserindo na lista...")
 
