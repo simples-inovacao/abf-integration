@@ -169,39 +169,47 @@ class abfIntegration{
 							assinaturas = data.filter(f => f.status === "ACTIVE");
 						
 						let assList = [5,6,7]
-
-						if(assinaturas.length <=0 || !assList.find(s => s.id === parseInt(storage.sku_id))){
+						
+						if(assList.find(s => s === parseInt(storage.sku_id))){
+							if(assinaturas.length <=0){
+								$(".shippingAuthentication > button").click(async () => {
+									await self.addTopToCart(storage.sku_id, search);
+								})
+							}else{
+								let pUpgrade = await self.query('GET', '/api/catalog_system/pub/products/search?fq=skuId:'+storage.sku_id);
+								
+								Swal.fire({
+								  html: `
+								  <div style="text-align:left">
+									<h4>Notamos que você possui uma assinatura ativa:</h4>
+									<p>Plano: <span style="text-transform:capitalize">${assinaturas[0].plan.id.replace("vtex.subscription.","").replace("-"," ")}</span></p>
+									<p>Licenças: ${assinaturas[0].items[0].quantity}</p>
+									<hr>
+									Deseja atualizar a sua assinatura para o plano <b>${pUpgrade[0].productName}</b>?<br>
+									O valor final será ${(pUpgrade[0].items[0].sellers[0].commertialOffer.Price * assinaturas[0].items[0].quantity).toLocaleString("pt-BR", { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' })}
+								  </div>
+								  `,
+								  icon: 'warning',
+								  showCancelButton: true,
+								  confirmButtonColor: '#0000ff',
+								  cancelButtonColor: '#dc3545',
+								  cancelButtonText: 'Não',
+								  confirmButtonText: 'Sim, desejo atualizar'
+								}).then(async (result) => {
+								  if (result.isConfirmed) {
+									return await self.addTopToCart(storage.sku_id, search, assinaturas[0].items[0].quantity, assinaturas[0]);
+								  }else{
+									  location.href = "/_secure/account?sc=1#/subscriptions";
+								  }
+								})
+							}
+						}else{
 							$(".shippingAuthentication > button").click(async () => {
 								await self.addTopToCart(storage.sku_id, search);
 							})
-						}else{
-							let pUpgrade = await self.query('GET', '/api/catalog_system/pub/products/search?fq=skuId:'+storage.sku_id);
-							
-							Swal.fire({
-							  html: `
-							  <div style="text-align:left">
-								<h4>Notamos que você possui uma assinatura ativa:</h4>
-								<p>Plano: <span style="text-transform:capitalize">${assinaturas[0].plan.id.replace("vtex.subscription.","").replace("-"," ")}</span></p>
-								<p>Licenças: ${assinaturas[0].items[0].quantity}</p>
-								<hr>
-								Deseja atualizar a sua assinatura para o plano <b>${pUpgrade[0].productName}</b>?<br>
-								O valor final será ${(pUpgrade[0].items[0].sellers[0].commertialOffer.Price * assinaturas[0].items[0].quantity).toLocaleString("pt-BR", { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' })}
-							  </div>
-							  `,
-							  icon: 'warning',
-							  showCancelButton: true,
-							  confirmButtonColor: '#0000ff',
-							  cancelButtonColor: '#dc3545',
-							  cancelButtonText: 'Não',
-							  confirmButtonText: 'Sim, desejo atualizar'
-							}).then(async (result) => {
-							  if (result.isConfirmed) {
-							    return await self.addTopToCart(storage.sku_id, search, assinaturas[0].items[0].quantity, assinaturas[0]);
-							  }else{
-							  	location.href = "/_secure/account?sc=1#/subscriptions";
-							  }
-							})
 						}
+
+						
 					}
 					
 				})
