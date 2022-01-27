@@ -26,7 +26,7 @@ module.exports = class abfIntegration{
             },
             id: req.id
         });
-        console.log("lead criado?", data)
+        console.log("lead criado?", data.creates)
         if(data.error.length > 0) return data.error;
         if(data.result.creates.length > 0) return data.result.creates;
     }
