@@ -26,7 +26,8 @@ module.exports = class abfIntegration{
             },
             id: req.id
         });
-    
+        console.log("lead criado?")
+        console.log(data)
         if(data.error.length > 0) return data.error;
         if(data.result.creates.length > 0) return data.result.creates;
     }
@@ -50,8 +51,10 @@ module.exports = class abfIntegration{
         let response = await this.getLead(req, lead);
 
         if(response.length <= 0){
+            console.log("não tem lead, criando...")
             return await this.createLead(req, lead);
         }else{
+            console.log("tem lead... atualizar")
             return response;
         }
     }
@@ -59,6 +62,7 @@ module.exports = class abfIntegration{
     async createLeadVtex(req, lead, list){
         await this.checkLead(req, lead);
         let data = await this.checkifHasOnList(req, lead, list);
+        console.log(data)
 
         return data;
     }
