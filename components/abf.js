@@ -64,6 +64,7 @@ module.exports = class abfIntegration{
         if(stt === "cancel" || stt === "canceled"){
             console.log("Aguardando aprovação para inserir na lista")
         }else{
+            console.log(stt)
             let data = await this.checkifHasOnList(req, lead, list);
             console.log("Aprovado, inserindo na lista...")
 
