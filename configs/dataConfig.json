@@ -7,7 +7,10 @@
     },
     "abf": {
         "account_id": "B755F6B4365C256FF6145ED5968C3139",
-        "account_secret": "996847D2A3856E7AFFB245CBE7103B11"
+        "account_secret": "996847D2A3856E7AFFB245CBE7103B11",
+        "assinaturas": [
+            5,6,7
+        ]
     },
     "tribecca": {
         "request_url": "https://api.portaldofranchising.com.br/simples-integration/companies",

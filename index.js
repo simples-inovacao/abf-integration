@@ -23,6 +23,7 @@ app.listen(3000, async() => {
     };
     
     // let user = await (await bossa.api()).find(data.email)
+    // console.log(user)
     // if(!user) return await (await bossa.api()).add(data)
     // console.log(await (await bossa.api()).changePlan(dataPlan))
     // console.log(await vtex.masterData().addDocument("SI", {"email_principal": "maria222@email.com","sku_da_assinatura": "sla", "marca": "SIMPLES TESTE", "cnpj": "50.645.242/0001-00"}))

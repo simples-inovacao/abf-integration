@@ -1,4 +1,4 @@
-const { vtex: {usarname, app_key, app_token, site} } = require("../configs/dataConfig.json")
+const { vtex: {usarname, app_key, app_token, site}, abf: { assinaturas } } = require("../configs/dataConfig.json")
 const fetch = require('node-fetch');
 const cache = require("../modules/cache");
 const abf = new(require("./abf"))();
@@ -260,8 +260,6 @@ module.exports = class vtexIntegration{
             const {status, clientProfileData} = await getOrder(id);
 
             let stt = statusToCheck.find(s => s == status);
-
-            // console.log(data.planData)
 
             if(stt === "cancel" || stt === "canceled"){
                 // ignora
