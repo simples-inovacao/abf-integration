@@ -26,9 +26,10 @@ class cacheSystem{
 
     del(key){
         let v = myCache.del(key);
-
+        
+        console.log(`[${key}] CACHE DELETADO`);
+        
         if(v !== undefined){
-            console.log(`[${key}] CACHE DELETADO`);
             return v;
         }
     }
@@ -42,7 +43,8 @@ class cacheSystem{
                     console.log(`[${key}] CACHE RENOVADO`);
                 break;
                 default:
-                    console.log(key, "expirou... Verificando novamente");
+                    console.log(key, "CACHE EXPIRADO - RENOVANDO");
+                    self.set(key, value)
                     await (await vtex.orders()).checkStatus(`${key}`, value);
                 break;
             }

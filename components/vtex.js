@@ -259,6 +259,8 @@ module.exports = class vtexIntegration{
 
             const {status, clientProfileData} = await getOrder(id);
 
+            console.log(`Cliente -> ${clientProfileData.firstName} ${clientProfileData.lastName}: ${status}`)
+
             let stt = statusToCheck.find(s => s == status);
 
             if(stt === "cancel" || stt === "canceled"){
@@ -275,7 +277,7 @@ module.exports = class vtexIntegration{
                 }
             }
 
-            await abf.createLeadVtex(req, {firstName:clientProfileData.firstName,lastName:clientProfileData.lastName,emailAddress:data.associate.vtex_email}, data.crm_id) // Cria/Atualiza o lead e adiciona a lista
+            await abf.createLeadVtex(req, {firstName:clientProfileData.firstName,lastName:clientProfileData.lastName,emailAddress:data.associate.vtex_email}, data.crm_id, stt) // Cria/Atualiza o lead e adiciona a lista
         }
 
         return {
