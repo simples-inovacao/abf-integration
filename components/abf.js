@@ -53,7 +53,7 @@ module.exports = class abfIntegration{
             console.log("não tem lead, criando...")
             return await this.createLead(req, lead);
         }else{
-            console.log("tem lead... atualizar", response)
+            console.log("tem lead... atualizar")
             return response;
         }
     }
@@ -61,10 +61,12 @@ module.exports = class abfIntegration{
     async createLeadVtex(req, lead, list, stt){
         await this.checkLead(req, lead);
 
+        console.log("status", stt)
+
         if(stt === "cancel" || stt === "canceled"){
             console.log("Aguardando aprovação para inserir na lista")
         }else{
-            console.log(stt)
+            
             let data = await this.checkifHasOnList(req, lead, list);
             console.log("Aprovado, inserindo na lista...")
 
