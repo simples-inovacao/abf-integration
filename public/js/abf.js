@@ -239,9 +239,9 @@ class abfIntegration{
 	async authPage(){
 		let self = this;
 		
-		async function validateData({value}, {data}){
+		async function validateData({value}){
 			if(value === "") return throwError("Insira o seu CNPJ");
-			
+			const { data } = await this.query('GET', 'https://simples.tutoriaiseinformatica.com/database?doc='+value);
 			let search = data.filter(d => d.Document === value);
 			
 			if(search.length <= 0){
@@ -287,7 +287,6 @@ class abfIntegration{
 		
 		if(document.body.id !== 'login-auth') return;
 		
-		let database = await this.query('GET', 'https://simples.tutoriaiseinformatica.com/database');
 		
 		toggleOptions(false);
 		
@@ -307,7 +306,7 @@ class abfIntegration{
 
 				if(value.value.length >= 18){
 					throwError("");
-					validateData(value, database)
+					validateData(value)
 				}else{
 					// throwError("Digite um 'CNPJ 'válido");
 				}
@@ -324,7 +323,7 @@ class abfIntegration{
 
 				if(val.length >= 18){
 					if(!$("select").val()) return throwError("Selecione uma franquia");
-					validateData({value: val}, database)
+					validateData({value: val})
 					throwError("");
 				}
 			}

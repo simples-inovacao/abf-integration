@@ -63,7 +63,6 @@ module.exports = class abfIntegration{
     async createLeadVtex(req, lead, list){
         await this.checkLead(req, lead);
         let data = await this.checkifHasOnList(req, lead, list);
-        console.log(data)
 
         return data;
     }
@@ -79,7 +78,6 @@ module.exports = class abfIntegration{
     }
 
     async addLeadAtList(req, lead, list){
-        console.log(list)
         const { emailAddress } = lead;
         const { data } = await this.query('POST', {
             method: 'addListMemberEmailAddress', 
@@ -123,6 +121,23 @@ module.exports = class abfIntegration{
     async getClientsDatabase(){
         try {
             let response = await fetch(request_url, {
+                method: 'GET',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'apiKey': app_key
+                }
+            })
+            let data = await response.json()
+    
+            return data;
+        } catch (error) {
+            return [];
+        }
+    }
+
+    async getClientsIndividual(doc){
+        try {
+            let response = await fetch('https://api.portaldofranchising.com.br/simples-integration/company?document='+doc, {
                 method: 'GET',
                 headers: { 
                     'Content-Type': 'application/json',

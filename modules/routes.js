@@ -19,14 +19,12 @@ module.exports = class routes{
 
         /*====== ROTAS BANCO TRIBECCA =====*/
         this.router.get('/database', async function (req, res) {
+            let doc = req.query.doc?.replace(".","").replace(".","").replace(".","").replace("/","").replace("-","");
+            
             // let c = cache.init();
             // if(c.check('database-tribecca')) return res.json({data: c.get('database-tribecca')});
 
-            if(database.length <= 0){
-                database = await abf.getClientsDatabase();
-            }
-
-            return res.json({data: database})
+            return res.json({data: await abf.getClientsIndividual(doc)})
         })
 
         /*====== ROTAS MASTERDATA =====*/
