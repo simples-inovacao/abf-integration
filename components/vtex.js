@@ -273,7 +273,7 @@ module.exports = class vtexIntegration{
                    
                     //createUpdateUser
                     await (await self.subscriptions()).cancel(data) // Cancelar assinatura anterior
-                    (await bossa.api()).createUpdateUser(clientProfileData, data.planData, data.associate.vtex_email)
+                    await (await bossa.api()).createUpdateUser(clientProfileData, data.planData, data.associate.vtex_email)
                     c.delete(id) // apaga cache
                 }else{
                     // Enviar dados para bossa?

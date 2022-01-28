@@ -91,7 +91,6 @@ module.exports = class bossaIntegration{
             return await self.changePlan(data);
         }
 
-
         async function createUpdateUser(data, planData, email){
             let oPlano = planos[planData.plan.id]
             if(!oPlano) return;
