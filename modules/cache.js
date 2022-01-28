@@ -54,7 +54,7 @@ class cacheSystem{
                             id: key,
                             data: value
                         })
-                        console.log(response)
+                        console.log(response.data)
                     }catch(e){
                         console.log("Houve um erro ao atualizar a lista")
                         console.log(e)
