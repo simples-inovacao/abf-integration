@@ -49,11 +49,15 @@ class cacheSystem{
                 default:
                     console.log(key, "CACHE EXPIRADO - RENOVANDO");
                     myCache.set(key, value)
-                    let response = await axios.post('https://simples.tutoriaiseinformatica.com/automation/list/add', {
-                        id: {id: key},
-                        data: value
-                    })
-                    console.log(response)
+                    try{
+                        let response = await axios.post('https://simples.tutoriaiseinformatica.com/automation/list/add', {
+                            id: {id: key},
+                            data: value
+                        })
+                        console.log(response)
+                    }catch(e){
+                        console.log("Houve um erro ao atualizar a lista")
+                    }
                 break;
             }
         });
