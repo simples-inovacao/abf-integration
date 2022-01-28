@@ -93,8 +93,8 @@ module.exports = class bossaIntegration{
 
         async function createUpdateUser(data, planData, email){
             let oPlano = planos[planData]
-            if(!oPlano) return;
-            if(!email) return;
+            if(!oPlano) return console.log("Plano não encontrado");
+            if(!email) return console.log("Email não encontrado?");
 
             function formataNumeroTelefone(numero) {
                 numero = numero.toString();
