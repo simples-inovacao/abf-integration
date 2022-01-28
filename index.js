@@ -7,5 +7,5 @@ cacheList.list();
 
 
 app.listen(3000, async() => {
-        
+    console.log("ready")    
 })
