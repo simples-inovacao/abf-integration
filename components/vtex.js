@@ -172,7 +172,7 @@ module.exports = class vtexIntegration{
         async function cancelPlan(data){
             let activePlans = await getActiveSubscription(data.associate.vtex_email);
             let oldPlan = activePlans.find(ap => ap.id === data.planData.id)
-
+                console.log(oldPlan)
             if(oldPlan){
                 if(oldPlan.status !== "ACTIVE") return;
                 let status = await updateStatusSubscription(oldPlan.id, "CANCELED");
