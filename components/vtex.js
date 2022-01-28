@@ -173,12 +173,12 @@ module.exports = class vtexIntegration{
             let activePlans = await getActiveSubscription(data.associate.vtex_email);
             let oldPlan = activePlans.find(ap => ap.id === data.planData.id)
 
-            console.log("Estou aqui", oldPlan.plan.id)
+            console.log("Perto de cancelar o plano", oldPlan?.plan.id)
 
             if(oldPlan){
                 if(oldPlan.status !== "ACTIVE") return;
                 let status = await updateStatusSubscription(oldPlan.id, "CANCELED");
-                console.log("Novo status: ",status.status)
+                console.log("Plano cancelado, status: ",status.status)
             }
         }
 
@@ -275,10 +275,12 @@ module.exports = class vtexIntegration{
                 if(data.hasPlan){
                    
                     //createUpdateUser
+                    console.log("Tem assinatura ativa")
                     await (await self.subscriptions()).cancel(data) // Cancelar assinatura anterior
                     await (await bossa.api()).createUpdateUser(clientProfileData, items[0].attachments[0].name, data.associate.vtex_email)
                     c.delete(id) // apaga cache
                 }else{
+                    console.log("Não tem assinatura ativa")
                     if(items[0].attachments[0].name){
                         let plano = planos[items[0].attachments[0].name]
                         await (await bossa.api()).createUpdateUser(clientProfileData, items[0].attachments[0].name, data.associate.vtex_email)
