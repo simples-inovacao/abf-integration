@@ -111,8 +111,6 @@ module.exports = class bossaIntegration{
                 return telefoneFormatado;
             }
 
-            console.log("numero: ",data.phone.replace("+55",""))
-            
             let dataa = {
                 "parentOriginCode": parentOriginCode,
                 "name": data.firstName+' '+data.lastName,
