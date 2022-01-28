@@ -58,22 +58,16 @@ module.exports = class abfIntegration{
         }
     }
     /*======== FIM DA CONFIGURAÇÃO DE LEAD ========*/
-    async createLeadVtex(req, lead, list, stt, c, id){
+    async createLeadVtex(req, lead, list, stt){
         await this.checkLead(req, lead);
 
         
         if(stt === "cancel" || stt === "canceled" || stt == "payment-pending"){
             console.log("Aguardando aprovação para inserir na lista")
         }else{
-            
             console.log("status", stt)
+            console.log("Aprovado")
             let data = await this.checkifHasOnList(req, lead, list);
-            console.log("Aprovado, inserindo na lista...")
-            
-            if(c){
-                c.delete(id) 
-            }
-
             return data;
         }
         
@@ -99,7 +93,9 @@ module.exports = class abfIntegration{
             },
             id: req.id
         });
+        console.log(data.error)
         if(data.result === null) return data.error;
+        console.log("Inserido na lista...")
         return data.result.updates;
     }
 
