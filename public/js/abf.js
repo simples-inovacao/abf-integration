@@ -376,7 +376,7 @@ class abfIntegration{
 		storage = JSON.parse(storage);
 		storage.orderId = location.search.replace("?og=", "");
 		
-		let response = await fetch(`https://simples.tutoriaiseinformatica.com/vtex/orderplaced/add`, {
+		let response = await fetch(`http://localhost:3000/vtex/orderplaced/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

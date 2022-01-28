@@ -1,6 +1,7 @@
 const { vtex: {usarname, app_key, app_token, site}, abf: { assinaturas } } = require("../configs/dataConfig.json")
 const fetch = require('node-fetch');
 const cache = require("../modules/cache");
+const bossa = new(require("./bossa"))();
 const abf = new(require("./abf"))();
 
 module.exports = class vtexIntegration{
@@ -263,14 +264,16 @@ module.exports = class vtexIntegration{
             console.log(`Cliente -> ${clientProfileData.firstName} ${clientProfileData.lastName}: ${status}`)
 
             let stt = statusToCheck.find(s => s == status);
-
+            
             if(stt === "cancel" || stt === "canceled"){
                 // ignora
                 c.delete(id) // apaga cache
             }else if(stt && stt !== "payment-pending"){
                 if(data.hasPlan){
+                   
+                    //createUpdateUser
                     await (await self.subscriptions()).cancel(data) // Cancelar assinatura anterior
-                    // Enviar dados para bossa?
+                    (await bossa.api()).createUpdateUser(clientProfileData, data.planData, data.associate.vtex_email)
                     c.delete(id) // apaga cache
                 }else{
                     // Enviar dados para bossa?

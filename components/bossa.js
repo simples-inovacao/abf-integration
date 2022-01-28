@@ -1,4 +1,4 @@
-const { bossa: {host, username, password, parentOriginCode} } = require("../configs/dataConfig.json")
+const { bossa: {host, username, password, parentOriginCode, planos} } = require("../configs/dataConfig.json")
 const axios = require("../modules/axios")
 
 module.exports = class bossaIntegration{
@@ -76,7 +76,7 @@ module.exports = class bossaIntegration{
         
         async function addUser(data){
             let insert = await self.createUser(data)
-
+            console.log(insert)
             return insert;
         }
 
@@ -87,13 +87,42 @@ module.exports = class bossaIntegration{
         }
 
         async function changeUserPlan(data){
+            console.log("Plano Atualizado")
             return await self.changePlan(data);
+        }
+
+
+        async function createUpdateUser(data, planData, email){
+            let oPlano = planos[planData.plan.id]
+            if(!oPlano) return;
+            if(!email) return;
+
+            let dataa = {
+                "parentOriginCode": parentOriginCode,
+                "name": data.firstName+' '+data.lastName,
+                "email": email,
+                "phone": data.phone.replace("+55",""),
+                "cpf": data.document,
+                "idGroups": parseInt(oPlano)
+            };
+        
+            let dataPlan = {
+                "parentOriginCode": parentOriginCode,
+                "email": email,
+                "idGroups": parseInt(oPlano)
+            };
+            
+            let user = await findUser(email)
+            if(!user) return await addUser(dataa)
+            let change = await changeUserPlan(dataPlan)
+            console.log(change)
         }
 
         return {
             add: addUser,
             find: findUser,
-            changePlan: changeUserPlan
+            changePlan: changeUserPlan,
+            createUpdateUser: createUpdateUser
         }
     }
 }
