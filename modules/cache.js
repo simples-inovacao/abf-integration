@@ -51,7 +51,7 @@ class cacheSystem{
                     myCache.set(key, value)
                     try{
                         let response = await axios.post('https://simples.tutoriaiseinformatica.com/automation/list/add', {
-                            id: {id: key},
+                            id: key,
                             data: value
                         })
                         console.log(response)
