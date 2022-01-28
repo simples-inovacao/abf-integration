@@ -172,7 +172,9 @@ module.exports = class vtexIntegration{
         async function cancelPlan(data){
             let activePlans = await getActiveSubscription(data.associate.vtex_email);
             let oldPlan = activePlans.find(ap => ap.id === data.planData.id)
-                console.log(oldPlan)
+
+            console.log("Estou aqui", oldPlan.plan.id)
+
             if(oldPlan){
                 if(oldPlan.status !== "ACTIVE") return;
                 let status = await updateStatusSubscription(oldPlan.id, "CANCELED");
@@ -256,7 +258,8 @@ module.exports = class vtexIntegration{
                 "handling",
                 "cancel",
                 "canceled",
-                "payment-pending"
+                "payment-pending",
+                "window-to-cancel"
             ]
 
             const {status, clientProfileData, items} = await getOrder(id);
