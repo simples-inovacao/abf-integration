@@ -96,11 +96,28 @@ module.exports = class bossaIntegration{
             if(!oPlano) return;
             if(!email) return;
 
+            function formataNumeroTelefone(numero) {
+                numero = numero.toString();
+              var length = numero.length;
+              var ddd = numero.substring(0, 2);
+              var telefoneFormatado;
+                
+              if (length === 10) {
+                  telefoneFormatado = '(' + ddd + ') ' + numero.substring(2, 6) + '-' + numero.substring(6, 10);
+              } else if (length === 11) {
+                  telefoneFormatado = '(' + ddd + ') ' + numero.substring(2, 7) + '-' + numero.substring(7, 11);
+              }
+              
+                return telefoneFormatado;
+            }
+
+            console.log("numero: ",data.phone.replace("+55",""))
+            
             let dataa = {
                 "parentOriginCode": parentOriginCode,
                 "name": data.firstName+' '+data.lastName,
                 "email": email,
-                "phone": data.phone.replace("+55",""),
+                "phone": formataNumeroTelefone(data.phone.replace("+55","")),
                 "cpf": data.document,
                 "idGroups": parseInt(oPlano)
             };
