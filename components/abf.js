@@ -26,7 +26,7 @@ module.exports = class abfIntegration{
             },
             id: req.id
         });
-        console.log("lead criado?", data.creates)
+        console.log("lead criado")
         if(data.error.length > 0) return data.error;
         if(data.result.creates.length > 0) return data.result.creates;
     }
@@ -53,13 +53,12 @@ module.exports = class abfIntegration{
             console.log("não tem lead, criando...")
             return await this.createLead(req, lead);
         }else{
-            console.log(response)
             console.log("tem lead... atualizar")
             return response;
         }
     }
     /*======== FIM DA CONFIGURAÇÃO DE LEAD ========*/
-    async createLeadVtex(req, lead, list, stt){
+    async createLeadVtex(req, lead, list, stt, c, id){
         await this.checkLead(req, lead);
 
         
@@ -69,6 +68,11 @@ module.exports = class abfIntegration{
             console.log("status", stt)
             console.log("Aprovado")
             let data = await this.checkifHasOnList(req, lead, list);
+
+            if(id){
+                c.delete(id)
+            }
+
             return data;
         }
         
@@ -94,7 +98,6 @@ module.exports = class abfIntegration{
             },
             id: req.id
         });
-        console.log(data.error)
         if(data.result === null) return data.error;
         console.log("Inserido na lista...")
         return data.result.updates;
