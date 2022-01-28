@@ -21,6 +21,8 @@ app.listen(3000, async() => {
         "email": "suportedeTI4@yopmail.com",
         "idGroups": 39
     };
+
+    console.log("ready")
     
     // let user = await (await bossa.api()).find(data.email)
     // console.log(user)
