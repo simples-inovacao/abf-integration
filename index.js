@@ -23,8 +23,8 @@ app.listen(3000, async() => {
     //     "idGroups": 39
     // };
     
-    let user = await (await bossa.api()).find("hazardts@gmail.com")
-    console.log(user)
+    // let user = await (await bossa.api()).find("hazardts@gmail.com")
+    // console.log(user)
     // if(!user) return await (await bossa.api()).add(data)
     // await (await bossa.api()).changePlan(dataPlan)
 
