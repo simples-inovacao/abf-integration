@@ -1,4 +1,4 @@
-const { vtex: {usarname, app_key, app_token, site}, abf: { assinaturas } } = require("../configs/dataConfig.json")
+const { vtex: {usarname, app_key, app_token, site}, abf: { assinaturas }, bossa: {planos} } = require("../configs/dataConfig.json")
 const fetch = require('node-fetch');
 const cache = require("../modules/cache");
 const bossa = new(require("./bossa"))();
@@ -276,6 +276,10 @@ module.exports = class vtexIntegration{
                     await (await bossa.api()).createUpdateUser(clientProfileData, items[0].attachments[0].name, data.associate.vtex_email)
                     c.delete(id) // apaga cache
                 }else{
+                    if(items[0].attachments[0].name){
+                        let plano = planos[items[0].attachments[0].name]
+                        await (await bossa.api()).createUpdateUser(clientProfileData, items[0].attachments[0].name, data.associate.vtex_email)
+                    }
                     // Enviar dados para bossa?
                     c.delete(id) // apaga cache
                 }
