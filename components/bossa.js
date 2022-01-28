@@ -92,7 +92,7 @@ module.exports = class bossaIntegration{
         }
 
         async function createUpdateUser(data, planData, email){
-            let oPlano = planos[planData.plan.id]
+            let oPlano = planos[planData]
             if(!oPlano) return;
             if(!email) return;
 

@@ -259,7 +259,7 @@ module.exports = class vtexIntegration{
                 "payment-pending"
             ]
 
-            const {status, clientProfileData} = await getOrder(id);
+            const {status, clientProfileData, items} = await getOrder(id);
 
             console.log(`Cliente -> ${clientProfileData.firstName} ${clientProfileData.lastName}: ${status}`)
 
@@ -273,7 +273,7 @@ module.exports = class vtexIntegration{
                    
                     //createUpdateUser
                     await (await self.subscriptions()).cancel(data) // Cancelar assinatura anterior
-                    await (await bossa.api()).createUpdateUser(clientProfileData, data.planData, data.associate.vtex_email)
+                    await (await bossa.api()).createUpdateUser(clientProfileData, items[0].attachments[0].name, data.associate.vtex_email)
                     c.delete(id) // apaga cache
                 }else{
                     // Enviar dados para bossa?
