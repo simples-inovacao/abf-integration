@@ -58,7 +58,7 @@ module.exports = class abfIntegration{
         }
     }
     /*======== FIM DA CONFIGURAÇÃO DE LEAD ========*/
-    async createLeadVtex(req, lead, list, stt){
+    async createLeadVtex(req, lead, list, stt, c, id){
         await this.checkLead(req, lead);
 
         
@@ -69,6 +69,10 @@ module.exports = class abfIntegration{
             console.log("status", stt)
             let data = await this.checkifHasOnList(req, lead, list);
             console.log("Aprovado, inserindo na lista...")
+            
+            if(c){
+                c.delete(id) 
+            }
 
             return data;
         }
