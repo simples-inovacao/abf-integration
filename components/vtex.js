@@ -281,9 +281,9 @@ module.exports = class vtexIntegration{
                     c.delete(id) // apaga cache
                 }else{
                     console.log("Não tem assinatura ativa")
-                    if(items[0].attachments[0].name){
-                        let plano = planos[items[0].attachments[0].name]
-                        await (await bossa.api()).createUpdateUser(clientProfileData, items[0].attachments[0].name, data.associate.vtex_email, data.associate.Id)
+                    if(items[0].attachments[0] || items[0].id == 5){
+                        let plano = planos[items[0].attachments[0].name]||items[0].id
+                        await (await bossa.api()).createUpdateUser(clientProfileData, plano, data.associate.vtex_email, data.associate.Id)
                     }
                     // Enviar dados para bossa?
                     c.delete(id) // apaga cache

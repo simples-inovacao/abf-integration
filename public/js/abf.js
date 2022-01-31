@@ -168,7 +168,11 @@ class abfIntegration{
 						let assinaturas = data||[];
 							assinaturas = data.filter(f => f.status === "ACTIVE");
 						
-						let assList = [5,6,7]
+						let assList = [
+							// 5,
+							6,
+							7
+						]
 						
 						if(assList.find(s => s === parseInt(storage.sku_id))){
 							if(assinaturas.length <=0){
