@@ -277,13 +277,13 @@ module.exports = class vtexIntegration{
                     //createUpdateUser
                     console.log("Tem assinatura ativa")
                     await (await self.subscriptions()).cancel(data) // Cancelar assinatura anterior
-                    await (await bossa.api()).createUpdateUser(clientProfileData, items[0].attachments[0].name, data.associate.vtex_email)
+                    await (await bossa.api()).createUpdateUser(clientProfileData, items[0].attachments[0].name, data.associate.vtex_email, data.associate.Id)
                     c.delete(id) // apaga cache
                 }else{
                     console.log("Não tem assinatura ativa")
                     if(items[0].attachments[0].name){
                         let plano = planos[items[0].attachments[0].name]
-                        await (await bossa.api()).createUpdateUser(clientProfileData, items[0].attachments[0].name, data.associate.vtex_email)
+                        await (await bossa.api()).createUpdateUser(clientProfileData, items[0].attachments[0].name, data.associate.vtex_email, data.associate.Id)
                     }
                     // Enviar dados para bossa?
                     c.delete(id) // apaga cache

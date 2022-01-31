@@ -91,7 +91,7 @@ module.exports = class bossaIntegration{
             return await self.changePlan(data);
         }
 
-        async function createUpdateUser(data, planData, email){
+        async function createUpdateUser(data, planData, email, originCode){
             let oPlano = planos[planData]
             if(!oPlano) return console.log("Plano não encontrado");
             if(!email) return console.log("Email não encontrado?");
@@ -112,7 +112,7 @@ module.exports = class bossaIntegration{
             }
 
             let dataa = {
-                "parentOriginCode": parentOriginCode,
+                "parentOriginCode": originCode||parentOriginCode,
                 "name": data.firstName+' '+data.lastName,
                 "email": email,
                 "phone": formataNumeroTelefone(data.phone.replace("+55","")),
@@ -121,7 +121,7 @@ module.exports = class bossaIntegration{
             };
         
             let dataPlan = {
-                "parentOriginCode": parentOriginCode,
+                "parentOriginCode": originCode||parentOriginCode,
                 "email": email,
                 "idGroups": parseInt(oPlano)
             };
