@@ -57,7 +57,7 @@ class cacheSystem{
                         console.log("Adicionou")
                     }catch(e){
                         console.log("Houve um erro ao atualizar a lista")
-                        console.log(e.data)
+                        console.log(e)
                     }
                 break;
             }
