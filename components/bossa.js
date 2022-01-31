@@ -111,7 +111,7 @@ module.exports = class bossaIntegration{
             }
 
             let dataa = {
-                "parentOriginCode": originCode,
+                "parentOriginCode": 110,
                 "name": data.firstName+' '+data.lastName,
                 "email": email,
                 "phone": formataNumeroTelefone(data.phone.replace("+55","")),
@@ -120,7 +120,7 @@ module.exports = class bossaIntegration{
             };
         
             let dataPlan = {
-                "parentOriginCode": originCode,
+                "parentOriginCode": 110,
                 "email": email,
                 "idGroups": parseInt(oPlano)
             };
