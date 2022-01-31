@@ -126,8 +126,15 @@ module.exports = class bossaIntegration{
             };
             
             let user = await findUser(email, originCode)
-            if(!user) return await addUser(dataa)
+            if(!user){
+                console.log("Não tem usuário, cadastrando...")
+                let res = await addUser(dataa);
+                console.log(res)
+                return;
+            }
             let change = await changeUserPlan(dataPlan)
+            console.log("tem usuário, atualizando...")
+            console.log(change)
         }
 
         return {
