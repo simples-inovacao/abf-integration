@@ -127,7 +127,7 @@ module.exports = class bossaIntegration{
                 "idGroups": parseInt(oPlano)
             };
             
-            let user = await findUser(email, originCode)
+            let user = await findUser(email, 110)
             if(!user){
                 console.log("Não tem usuário, cadastrando...")
                 let res = await addUser(dataa);
