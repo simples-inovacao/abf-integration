@@ -11,9 +11,9 @@ app.listen(3000, async() => {
     // let data = {
     //     "parentOriginCode": 110,
     //     "name": "SUporte TI",
-    //     "email": "simplesteste222@teste.com",
+    //     "email": "simplesteste22222@teste.com",
     //     "phone": "(11) 99999-7777",
-    //     "cpf": "043.530.740-16",
+    //     "cpf": "04353074016",
     //     "idGroups": 39
     // };
 

@@ -128,9 +128,9 @@ module.exports = class bossaIntegration{
             
             // let user = await findUser(email, originCode)
             // if(!user) return await addUser(dataa)
-            await addUser(dataa)
+            let status = await addUser(dataa)
             // let change = await changeUserPlan(dataPlan)
-            console.log(dataa)
+            console.log(status)
         }
 
         return {
