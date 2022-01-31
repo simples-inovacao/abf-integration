@@ -124,6 +124,8 @@ module.exports = class bossaIntegration{
                 "email": email,
                 "idGroups": parseInt(oPlano)
             };
+
+            console.log(originCode)
             
             let user = await findUser(email, originCode)
             if(!user){
