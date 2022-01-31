@@ -80,8 +80,8 @@ module.exports = class bossaIntegration{
             return insert;
         }
 
-        async function findUser(email){
-            const data = await self.searchUser(parentOriginCode);
+        async function findUser(email, originCode){
+            const data = await self.searchUser(originCode);
 
             return data.user[0].find(u => u.email === email);
         }
@@ -126,7 +126,7 @@ module.exports = class bossaIntegration{
                 "idGroups": parseInt(oPlano)
             };
             
-            let user = await findUser(email)
+            let user = await findUser(email, originCode)
             if(!user) return await addUser(dataa)
             let change = await changeUserPlan(dataPlan)
             console.log(change)
