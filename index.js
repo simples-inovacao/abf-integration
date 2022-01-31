@@ -7,15 +7,18 @@ cacheList.list();
 
 
 app.listen(3000, async() => {
-    console.log("ready")
+    // console.log("ready")
     // let data = {
-    //     "parentOriginCode": 37722,
+    //     "parentOriginCode": 35262,
     //     "name": "SUporte TI",
     //     "email": "suportedeTI4@yopmail.com",
     //     "phone": "(11) 99999-7777",
     //     "cpf": "043.530.740-16",
     //     "idGroups": 39
     // };
+
+    // let testAdd = await (await bossa.api()).add(data)
+    // console.log(testAdd)
 
     // let dataPlan = {
     //     "parentOriginCode": 110,
@@ -28,8 +31,7 @@ app.listen(3000, async() => {
     // if(!user) return await (await bossa.api()).add(data)
     // await (await bossa.api()).changePlan(dataPlan)
 
-    // let testAdd = await (await bossa.api()).add(data)
-    //     console.log(testAdd)
+    
 
     
 

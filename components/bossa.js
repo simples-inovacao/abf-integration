@@ -126,10 +126,11 @@ module.exports = class bossaIntegration{
                 "idGroups": parseInt(oPlano)
             };
             
-            let user = await findUser(email, originCode)
-            if(!user) return await addUser(dataa)
-            let change = await changeUserPlan(dataPlan)
-            console.log(change)
+            // let user = await findUser(email, originCode)
+            // if(!user) return await addUser(dataa)
+            await addUser(dataa)
+            // let change = await changeUserPlan(dataPlan)
+            console.log(dataa)
         }
 
         return {
