@@ -278,7 +278,7 @@ module.exports = class vtexIntegration{
                     await (await bossa.api()).createUpdateUser(clientProfileData, items[0].attachments[0].name, data.associate.vtex_email, data.associate.vtex_franquia_selected)
                     c.delete(id) // apaga cache
                 }else{
-                    if(items[0].id === 5){
+                    if(items[0].id === "5"){
                         console.log("Plano gratis")
                         await (await bossa.api()).createUpdateUser(clientProfileData, items[0].id, data.associate.vtex_email, data.associate.vtex_franquia_selected)
                         c.delete(id) // apaga cache
