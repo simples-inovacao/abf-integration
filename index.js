@@ -11,9 +11,9 @@ app.listen(3000, async() => {
     // let data = {
     //     "parentOriginCode": 110,
     //     "name": "SUporte TI",
-    //     "email": "simplesteste22222@teste.com",
+    //     "email": "simplesteste222@teste.com",
     //     "phone": "(11) 99999-7777",
-    //     "cpf": "04353074016",
+    //     "cpf": "043.530.740-16",
     //     "idGroups": 39
     // };
 
@@ -26,8 +26,8 @@ app.listen(3000, async() => {
     //     "idGroups": 39
     // };
     
-    let user = await (await bossa.api()).find("eliasnovoteste@yopmail.com", 110)
-    console.log(user)
+    // let user = await (await bossa.api()).find("eliasnovoteste@yopmail.com", 110)
+    // console.log(user)
     // if(!user) return await (await bossa.api()).add(data)
     // await (await bossa.api()).changePlan(dataPlan)
 

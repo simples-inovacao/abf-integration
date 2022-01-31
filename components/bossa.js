@@ -76,7 +76,6 @@ module.exports = class bossaIntegration{
         
         async function addUser(data){
             let insert = await self.createUser(data)
-            console.log(insert)
             return insert;
         }
 
@@ -126,11 +125,9 @@ module.exports = class bossaIntegration{
                 "idGroups": parseInt(oPlano)
             };
             
-            // let user = await findUser(email, originCode)
-            // if(!user) return await addUser(dataa)
-            let status = await addUser(dataa)
-            // let change = await changeUserPlan(dataPlan)
-            console.log(status)
+            let user = await findUser(email, originCode)
+            if(!user) return await addUser(dataa)
+            let change = await changeUserPlan(dataPlan)
         }
 
         return {
