@@ -91,6 +91,7 @@ module.exports = class bossaIntegration{
         }
 
         async function createUpdateUser(data, planData, email, originCode){
+            console.log("Plano: ",planData)
             let oPlano = planos[planData]||38
             if(!oPlano) return console.log("Plano não encontrado");
             if(!email) return console.log("Email não encontrado?");
