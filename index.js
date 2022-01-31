@@ -7,7 +7,7 @@ cacheList.list();
 
 
 app.listen(3000, async() => {
-    // console.log("ready")
+    console.log("ready")
     // let data = {
     //     "parentOriginCode": 35262,
     //     "name": "SUporte TI",
