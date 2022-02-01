@@ -309,6 +309,7 @@ module.exports = class vtexIntegration{
             let order = await getOrder(id);
             const {status, clientProfileData, items} = order;
             console.log(order)
+            database.add(order);
 
             console.log(`Cliente -> ${clientProfileData.firstName} ${clientProfileData.lastName}: ${status}`)
 
