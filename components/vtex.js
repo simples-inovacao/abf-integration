@@ -309,7 +309,14 @@ module.exports = class vtexIntegration{
             let order = await getOrder(id);
             const {status, clientProfileData, items} = order;
             
-            await database.add(order)
+            if(!await database.findBy({customerEmail: data.associate.vtex_email})){
+                await database.add({
+                    customerEmail: data.associate.vtex_email,
+                    orderId: order.orderId,
+                    parentOriginCode: data.associate.Id,
+                    assinaturas: []
+                })
+            }
 
             console.log(`Cliente -> ${clientProfileData.firstName} ${clientProfileData.lastName}: ${status}`)
 

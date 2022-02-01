@@ -33,10 +33,4 @@ app.listen(3000, async() => {
     // console.log(user)
     // if(!user) return await (await bossa.api()).add(data)
     // await (await bossa.api()).changePlan(dataPlan)
-
-    
-
-    
-
-    
 })
