@@ -320,7 +320,6 @@ module.exports = class vtexIntegration{
                 c.delete(id) // apaga cache
             }else if(stt && stt !== "payment-pending"){
                 if(data.hasPlan){
-                   
                     //createUpdateUser
                     console.log("Tem assinatura ativa")
                     await (await self.subscriptions()).cancel(data) // Cancelar assinatura anterior
