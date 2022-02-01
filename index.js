@@ -9,7 +9,7 @@ cacheList.list();
 
 app.listen(3000, async() => {
     console.log("ready")
-    await (await vtex.subscriptions()).save();
+    // await (await vtex.subscriptions()).save();
     
     // let data = {
     //     "parentOriginCode": 34991,
