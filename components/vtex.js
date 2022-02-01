@@ -4,6 +4,8 @@ const cache = require("../modules/cache");
 const bossa = new(require("./bossa"))();
 const abf = new(require("./abf"))();
 
+const database = new(require('./database'))('subscriptions')
+
 module.exports = class vtexIntegration{
     masterData(){
         async function getDocument(id, entityName = "SI"){
@@ -109,6 +111,48 @@ module.exports = class vtexIntegration{
             return data;
         }
 
+        async function getSubscriptionsCanceled(){
+            let response = await fetch(`https://${usarname}.vtexcommercestable.com.br/api/rns/pub/subscriptions?status=CANCELED&page=1&size=100`, {
+                method: 'GET',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'X-VTEX-API-AppKey': app_key,
+                    'X-VTEX-API-AppToken': app_token
+                }
+            })
+            let data = await response.json()
+    
+            return data;
+        }
+
+        async function saveDatabase(){
+            setInterval(async () => {
+                let sublist = await getSubscriptionsCanceled();
+                for(let sub of sublist){
+                    let obj = {
+                        id: sub.id,
+                        status: sub.status,
+                        customerEmail: sub.customerEmail,
+                        plan: {
+                            id: sub.plan.id
+                        },
+                        bossaRemoved: false
+                    }
+
+                    if(!database.findBy({id: obj.id})){
+                        database.add(obj);
+                    }
+                }
+                
+            }, 60000 * 60 * 8)
+
+            let db = database.filterBy({bossaRemoved: false});
+                
+            for(let item of db){
+                // let user = await bossa.api().fi
+            }
+        }
+
         async function getActiveSubscription(email){
             let data = await getSubscriptions(email);
             if(!data) return;
@@ -175,7 +219,7 @@ module.exports = class vtexIntegration{
 
             if(oldPlan){
                 if(oldPlan.status !== "ACTIVE") return;
-                // let status = await updateStatusSubscription(oldPlan.id, "CANCELED"); 
+                let status = await updateStatusSubscription(oldPlan.id, "CANCELED"); 
                 console.log("Plano cancelado, status: ",status.status)
             }
         }
@@ -183,9 +227,11 @@ module.exports = class vtexIntegration{
         return {
             get: getSubscriptions,
             getActives: getActiveSubscription,
+            getCanceleds: getSubscriptionsCanceled,
             deleteItem: deleteItemFromSubscription,
             addItem: addItemOnSubscription,
-            cancel: cancelPlan
+            cancel: cancelPlan,
+            save: saveDatabase
         }
     }
 
@@ -260,7 +306,9 @@ module.exports = class vtexIntegration{
                 "window-to-cancel"
             ]
 
-            const {status, clientProfileData, items} = await getOrder(id);
+            let order = await getOrder(id);
+            const {status, clientProfileData, items} = order;
+            console.log(order)
 
             console.log(`Cliente -> ${clientProfileData.firstName} ${clientProfileData.lastName}: ${status}`)
 
@@ -295,6 +343,20 @@ module.exports = class vtexIntegration{
                     c.delete(id) // apaga cache
                 }
             }
+
+            // let obj = {
+            //     id: sub.id,
+            //     status: sub.status,
+            //     customerEmail: sub.customerEmail,
+            //     plan: {
+            //         id: sub.plan.id
+            //     },
+            //     bossaRemoved: false
+            // }
+
+            // if(!database.findBy({id: obj.id})){
+            //     database.add(obj);
+            // }
 
             await abf.createLeadVtex(req, {firstName:clientProfileData.firstName,lastName:clientProfileData.lastName,emailAddress:data.associate.vtex_email}, data.crm_id, status, c, id) // Cria/Atualiza o lead e adiciona a lista
         }
