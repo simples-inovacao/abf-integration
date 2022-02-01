@@ -175,7 +175,7 @@ module.exports = class vtexIntegration{
 
             if(oldPlan){
                 if(oldPlan.status !== "ACTIVE") return;
-                let status = await updateStatusSubscription(oldPlan.id, "CANCELED");
+                // let status = await updateStatusSubscription(oldPlan.id, "CANCELED");
                 console.log("Plano cancelado, status: ",status.status)
             }
         }
