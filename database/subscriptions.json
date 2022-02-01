@@ -1,166 +1,29 @@
 {
   "data": [
     {
-      "id": "EC0B77F1DCE91BB02DEACEDFA6415A53",
-      "status": "CANCELED",
-      "customerEmail": "tsales@yopmail.com",
-      "plan": {
-        "id": "vtex.subscription.plano-basico"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "A26862C9EFA11B8066B849D798C1821D",
-      "status": "CANCELED",
-      "customerEmail": "eliasferreiracontato@gmail.com",
-      "plan": {
-        "id": "vtex.subscription.plano-basico"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "D6F7CED16DD7E4732071A61D18FA4536",
-      "status": "CANCELED",
-      "customerEmail": "hazardts@gmail.com",
-      "plan": {
-        "id": "vtex.subscription.plano-premium"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "88571AD134152EA9D23730ABBF22AC01",
-      "status": "CANCELED",
-      "customerEmail": "tsales@simplesinovacao.com",
-      "plan": {
-        "id": "vtex.subscription.plano-basico"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "134A11752E40123F6492CF6D00B59F7C",
-      "status": "CANCELED",
-      "customerEmail": "eliasferreira@id.uff.br",
-      "plan": {
-        "id": "vtex.subscription.plano-basico"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "793143BED7C8204BA63E07B2D0345F1F",
-      "status": "CANCELED",
-      "customerEmail": "tsales@yopmail.com",
-      "plan": {
-        "id": "vtex.subscription.plano-basico"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "73DBC30B909DB4B9D4F50FF126D2A9E8",
-      "status": "CANCELED",
-      "customerEmail": "suporte@simplesinovacao.com",
-      "plan": {
-        "id": "vtex.subscription.plano-premium"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "EDFC0CC4217BC1BBB698DF400209571A",
-      "status": "CANCELED",
-      "customerEmail": "suporte@simplesinovacao.com",
-      "plan": {
-        "id": "vtex.subscription.plano-basico"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "2DA3A01B4CE02A640C6E86C921C97EAA",
-      "status": "CANCELED",
-      "customerEmail": "tsales@simplesinovacao.com",
-      "plan": {
-        "id": "vtex.subscription.plano-premium"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "3569B7222158A6659DC14605880CDBF6",
-      "status": "CANCELED",
-      "customerEmail": "tsales@simplesinovacao.com",
-      "plan": {
-        "id": "vtex.subscription.plano-basico"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "D37D3A4EA38B558326D3AE5DCE8E0B1C",
-      "status": "CANCELED",
-      "customerEmail": "tsales@simplesinovacao.com",
-      "plan": {
-        "id": "vtex.subscription.plano-premium"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "4FFC7883AD0E6628020E0E6127178316",
-      "status": "CANCELED",
-      "customerEmail": "tsales@simplesinovacao.com",
-      "plan": {
-        "id": "vtex.subscription.plano-premium"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "AAEEEBB114484057370284B9A2632CFC",
-      "status": "CANCELED",
-      "customerEmail": "tsales@simplesinovacao.com",
-      "plan": {
-        "id": "vtex.subscription.plano-gratuito"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "AA8AA9AC050702E334E1092D2F742C16",
-      "status": "CANCELED",
-      "customerEmail": "simplesconsultoriaegestao@gmail.com",
-      "plan": {
-        "id": "vtex.subscription.plano-gratuito"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "E181DA454BF25E0ECA60054CE4BD873B",
-      "status": "CANCELED",
-      "customerEmail": "tsales@simplesinovacao.com",
-      "plan": {
-        "id": "vtex.subscription.plano-gratuito"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "0558CC6D21FF5FF33F075BD0D7EC7B18",
-      "status": "CANCELED",
-      "customerEmail": "pchagas@simplesinovacao.com",
-      "plan": {
-        "id": "vtex.subscription.plano-basico"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "ADF25A0CA6265908674EE2F7DF27884E",
-      "status": "CANCELED",
-      "customerEmail": "tsales@simplesinovacao.com",
-      "plan": {
-        "id": "vtex.subscription.plano-premium"
-      },
-      "bossaRemoved": false
-    },
-    {
-      "id": "EE05290EBFA1A521275B9A84F942542F",
-      "status": "CANCELED",
-      "customerEmail": "pchagas@simplesinovacao.com",
-      "plan": {
-        "id": "vtex.subscription.plano-basico"
-      },
-      "bossaRemoved": false
+      "customerEmail": "ultimotestesimples@yopmail.com",
+      "orderId": "1207623243691-01",
+      "parentOriginCode": 34991,
+      "assinaturas": [
+        {
+          "id": "0E9807706111AFE2727AE17A3F83AC4A",
+          "status": "ACTIVE",
+          "customerEmail": "ultimotestesimples@yopmail.com",
+          "plan": {
+            "id": "vtex.subscription.plano-basico"
+          },
+          "bossaRemoved": false
+        },
+        {
+          "id": "2ED3C423986EE1A588A4018DEB33C39C",
+          "status": "CANCELED",
+          "customerEmail": "ultimotestesimples@yopmail.com",
+          "plan": {
+            "id": "vtex.subscription.plano-premium"
+          },
+          "bossaRemoved": false
+        }
+      ]
     }
   ]
 }

@@ -70,6 +70,16 @@ module.exports = class bossaIntegration{
         }
     }
 
+    async disableUser(user){
+        try {
+            let response = await this.query(host+'/deactivate', 'POST', user);
+            
+            return response.data;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     async api(){
         let self = this;
         let auth = await this.auth();
@@ -139,11 +149,16 @@ module.exports = class bossaIntegration{
             console.log(change)
         }
 
+        async function deactiveUser(user){
+            return await self.disableUser(user);
+        }
+
         return {
             add: addUser,
             find: findUser,
             changePlan: changeUserPlan,
-            createUpdateUser: createUpdateUser
+            createUpdateUser: createUpdateUser,
+            disable: deactiveUser
         }
     }
 }

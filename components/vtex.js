@@ -125,32 +125,58 @@ module.exports = class vtexIntegration{
             return data;
         }
 
-        async function saveDatabase(){
-            setInterval(async () => {
-                let sublist = await getSubscriptionsCanceled();
-                for(let sub of sublist){
-                    let obj = {
-                        id: sub.id,
-                        status: sub.status,
-                        customerEmail: sub.customerEmail,
-                        plan: {
-                            id: sub.plan.id
-                        },
-                        bossaRemoved: false
-                    }
+        async function subSearch(){
+            let clients = database.find();
+            
+            for(let client of clients){
+                let assinaturas = await getSubscriptions(client.customerEmail);
+                let assCanceled = assinaturas.filter(f => f.status == "CANCELED");
+                let assActive = assinaturas.filter(f => f.status == "ACTIVE");
 
-                    if(!database.findBy({id: obj.id})){
-                        database.add(obj);
+                if(client.assinaturas.length !== assinaturas.length){
+                    client.assinaturas = [];
+
+                    for(let ass of assinaturas){
+                        client.assinaturas.push({
+                            id: ass.id,
+                            status: ass.status,
+                            customerEmail: ass.customerEmail,
+                            plan: {
+                                id: ass.plan.id
+                            },
+                            bossaRemoved: false
+                        })
+
                     }
+                    database.update({customerEmail: client.customerEmail}, client);
                 }
-                
-            }, 60000 * 60 * 8)
 
-            let db = database.filterBy({bossaRemoved: false});
-                
-            for(let item of db){
-                // let user = await bossa.api().fi
+                if(assActive.length <= 0 && assCanceled.length > 0){
+                    if(client.assinaturas.filter(f => f.bossaRemoved === false).length <= 0) return;
+                    
+                    for(let as of client.assinaturas){
+                        as.bossaRemoved = true;
+                    }
+
+                    let remove = await (await bossa.api()).disable({
+                        email: client.customerEmail,
+                        parentOriginCode: client.parentOriginCode
+                    });
+
+                    database.update({customerEmail: client.customerEmail}, client);
+                    
+                }else if(assActive.length > 0){
+                    // CASO TENHA ASSINATURA ATIVA, NÃO FAZ NADA?
+                }
             }
+        }
+
+        async function saveDatabase(){
+            
+
+            setInterval(async () => {
+                await subSearch();
+            }, 60000 * 60 * 8)
         }
 
         async function getActiveSubscription(email){

@@ -31,6 +31,11 @@ module.exports = class database{
         return this.db.get('data').find(params).value()
     }
 
+    async update(search, data){
+        await this.db.get('data').find(search).assign(data).write()
+        this.db.read();
+    }
+
     filterBy(params){
         return this.db.get('data').filter(params).value()
     }
