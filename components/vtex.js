@@ -310,7 +310,7 @@ module.exports = class vtexIntegration{
             const {status, clientProfileData, items} = order;
             
             if(!await database.findBy({customerEmail: data.associate.vtex_email})){
-                await database.add({
+                await database.add({ 
                     customerEmail: data.associate.vtex_email,
                     orderId: order.orderId,
                     parentOriginCode: data.associate.Id,
