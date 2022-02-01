@@ -113,7 +113,7 @@ module.exports = class bossaIntegration{
             }
 
             let dataa = {
-                "parentOriginCode": 110,
+                "parentOriginCode": originCode,
                 "name": data.firstName+' '+data.lastName,
                 "email": email,
                 "phone": formataNumeroTelefone(data.phone.replace("+55","")),
@@ -122,18 +122,19 @@ module.exports = class bossaIntegration{
             };
         
             let dataPlan = {
-                "parentOriginCode": 110,
+                "parentOriginCode": originCode,
                 "email": email,
                 "idGroups": parseInt(oPlano)
             };
             
-            let user = await findUser(email, 110)
+            let user = await findUser(email, originCode)
             if(!user){
                 console.log("Não tem usuário, cadastrando...")
                 let res = await addUser(dataa);
                 console.log(res)
                 return;
             }
+            
             let change = await changeUserPlan(dataPlan)
             console.log("tem usuário, atualizando...")
             console.log(change)

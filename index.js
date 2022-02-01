@@ -9,9 +9,9 @@ cacheList.list();
 app.listen(3000, async() => {
     console.log("ready")
     // let data = {
-    //     "parentOriginCode": 110,
+    //     "parentOriginCode": 34991,
     //     "name": "SUporte TI",
-    //     "email": "simplesteste222@teste.com",
+    //     "email": "testedothiagodasimples@teste.com",
     //     "phone": "(11) 99999-7777",
     //     "cpf": "043.530.740-16",
     //     "idGroups": 39
@@ -26,7 +26,7 @@ app.listen(3000, async() => {
     //     "idGroups": 39
     // };
     
-    // let user = await (await bossa.api()).find("testeagoravai@yopmail.com", 110)
+    // let user = await (await bossa.api()).find("testedothiagodasimples@teste.com", 34991)
     // console.log(user)
     // if(!user) return await (await bossa.api()).add(data)
     // await (await bossa.api()).changePlan(dataPlan)
