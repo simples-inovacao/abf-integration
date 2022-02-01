@@ -76,7 +76,6 @@ module.exports = class bossaIntegration{
         
         async function addUser(data){
             let insert = await self.createUser(data)
-            console.log(insert)
             return insert;
         }
 
@@ -92,7 +91,9 @@ module.exports = class bossaIntegration{
         }
 
         async function createUpdateUser(data, planData, email, originCode){
-            let oPlano = planos[planData]||planData
+            
+            let oPlano = (planData === "39" || planData === "40" ? planData : 38) //planos[planData]||38
+            console.log("O plano filtrado", oPlano)
             if(!oPlano) return console.log("Plano não encontrado");
             if(!email) return console.log("Email não encontrado?");
 
@@ -112,7 +113,7 @@ module.exports = class bossaIntegration{
             }
 
             let dataa = {
-                "parentOriginCode": originCode,
+                "parentOriginCode": 110,
                 "name": data.firstName+' '+data.lastName,
                 "email": email,
                 "phone": formataNumeroTelefone(data.phone.replace("+55","")),
@@ -121,14 +122,20 @@ module.exports = class bossaIntegration{
             };
         
             let dataPlan = {
-                "parentOriginCode": originCode,
+                "parentOriginCode": 110,
                 "email": email,
                 "idGroups": parseInt(oPlano)
             };
             
-            let user = await findUser(email, originCode)
-            if(!user) return await addUser(dataa)
+            let user = await findUser(email, 110)
+            if(!user){
+                console.log("Não tem usuário, cadastrando...")
+                let res = await addUser(dataa);
+                console.log(res)
+                return;
+            }
             let change = await changeUserPlan(dataPlan)
+            console.log("tem usuário, atualizando...")
             console.log(change)
         }
 
