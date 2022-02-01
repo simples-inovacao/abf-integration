@@ -338,7 +338,7 @@ module.exports = class vtexIntegration{
                     if(items[0].attachments[0]){
                         let plano = planos[items[0].attachments[0].name]
                         console.log("Oplano:", plano)
-                        await (await bossa.api()).createUpdateUser(clientProfileData, plano, data.associate.vtex_email, data.associate.vtex_franquia_selected)
+                        await (await bossa.api()).createUpdateUser(clientProfileData, plano, data.associate.vtex_email, data.associate.Id)
                     }
                     // Enviar dados para bossa?
                     c.delete(id) // apaga cache
