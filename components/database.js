@@ -4,6 +4,7 @@ const FileSync = require('lowdb/adapters/FileSync')
 
 module.exports = class database{
     constructor(dbName){
+        console.log("banco:", dbName)
         const adapter = new FileSync(`database/${dbName}.json`)
         const db = low(adapter)
         this.db_name = dbName;
@@ -28,7 +29,6 @@ module.exports = class database{
     }
     
     async findBy(params){
-        console.log(this.dbName)
         return await this.db.get('data').find(params).value()
     }
 

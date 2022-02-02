@@ -2,7 +2,7 @@ const app = require('./modules/express')
 const cacheList = require("./modules/cacheList");
 const vtex = new(require('./components/vtex'))()
 const bossa = new(require('./components/bossa'))()
-const database = new(require('./components/database'))('subscriptions')
+// const database = new(require('./components/database'))('subscriptions')
 
 cacheList.list();
 
