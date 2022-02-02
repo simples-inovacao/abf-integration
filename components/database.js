@@ -6,6 +6,7 @@ module.exports = class database{
     constructor(dbName){
         const adapter = new FileSync(`database/${dbName}.json`)
         const db = low(adapter)
+        this.db_name = dbName;
         this.db = db;
     }
 
@@ -27,6 +28,7 @@ module.exports = class database{
     }
     
     async findBy(params){
+        console.log(this.dbName)
         return await this.db.get('data').find(params).value()
     }
 
