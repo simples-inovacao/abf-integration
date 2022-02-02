@@ -68,13 +68,17 @@ class abfIntegration{
 					search.vtex_franquia_selected = $("select").val(),
 					storage.associate = search;
 
+					// vtexjs.checkout.getOrderForm() .then(function(orderForm) { 
+					// 	var marketingData = orderForm.marketingData;
+					// 	 marketingData = { 'marketingTags':['teste'] }; 
+					// 	 return vtexjs.checkout.sendAttachment('marketingData', marketingData) })
+					// 	 .done(function(orderForm) {  console.log(orderForm); });
+
 					const orderForm = await vtexjs.checkout.getOrderForm();
 					var marketingData = orderForm.marketingData; 
-						marketingData = {
-							'utmCampaign': 'associado'};
-					var marketingTags = {'marketingTags': search.Id}
+						marketingData = {'utmCampaign': 'associado', 'marketingTags': [search.Id]};
+
 					await vtexjs.checkout.sendAttachment('marketingData', marketingData); 
-					await vtexjs.checkout.sendAttachment('marketingTags', marketingTags); 
 				  }
 
 				if(assinatura){
@@ -249,7 +253,7 @@ class abfIntegration{
 		async function validateData({value}){
 			if(value === "") return throwError("Insira o seu CNPJ");
 			const { data } = await self.query('GET', 'https://simples.tutoriaiseinformatica.com/database?doc='+value);
-			console.log(data)
+			// console.log(data)
 			let search = data.filter(d => d.Document === value);
 			
 			if(search.length <= 0){
