@@ -350,7 +350,7 @@ module.exports = class vtexIntegration{
             const {status, clientProfileData, items} = order;
             const cliData = await getClientdata(clientProfileData.userProfileId)
             
-            return console.log(database.findBy({customerEmail: cliData[0].email}));
+            return console.log("Busca:", await database.findBy({customerEmail: cliData[0].email}));
 
             if(!database.findBy({customerEmail: cliData[0].email})){
                 database.add({ 

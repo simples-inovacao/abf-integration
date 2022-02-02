@@ -26,8 +26,8 @@ module.exports = class database{
         return this.db.get('data').value()
     }
     
-    findBy(params){
-        return this.db.get('data').find(params).value()
+    async findBy(params){
+        return await this.db.get('data').find(params).value()
     }
 
     async update(search, data){
