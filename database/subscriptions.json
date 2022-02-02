@@ -1,29 +1,11 @@
 {
   "data": [
     {
-      "customerEmail": "ultimotestesimples@yopmail.com",
-      "orderId": "1207623243691-01",
-      "parentOriginCode": 34991,
-      "assinaturas": [
-        {
-          "id": "0E9807706111AFE2727AE17A3F83AC4A",
-          "status": "ACTIVE",
-          "customerEmail": "ultimotestesimples@yopmail.com",
-          "plan": {
-            "id": "vtex.subscription.plano-basico"
-          },
-          "bossaRemoved": false
-        },
-        {
-          "id": "2ED3C423986EE1A588A4018DEB33C39C",
-          "status": "CANCELED",
-          "customerEmail": "ultimotestesimples@yopmail.com",
-          "plan": {
-            "id": "vtex.subscription.plano-premium"
-          },
-          "bossaRemoved": false
-        }
-      ]
+      "customerEmail": "alessandrapqueiroz@yahoo.com.br",
+      "crmList": "5234988034",
+      "orderId": "1207831159139-01",
+      "parentOriginCode": null,
+      "assinaturas": []
     }
   ]
 }

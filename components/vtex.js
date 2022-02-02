@@ -317,6 +317,20 @@ module.exports = class vtexIntegration{
             return data;
         }
 
+        async function getClientdata(id){
+            let response = await fetch(`http://api.vtex.com/${usarname}/dataentities/CL/search?_fields=_all&_where=userId=${id}`, {
+                method: 'GET',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'X-VTEX-API-AppKey': app_key,
+                    'X-VTEX-API-AppToken': app_token
+                }
+            })
+            let data = await response.json()
+            
+            return data;
+        }
+
         async function checkStatus(id, data, req, c){
 
             //https://help.vtex.com/pt/tutorial/tabela-de-status-de-pedidos-oms--frequentlyAskedQuestions_773
@@ -334,12 +348,14 @@ module.exports = class vtexIntegration{
 
             let order = await getOrder(id);
             const {status, clientProfileData, items} = order;
+            const cliData = await getClientdata(clientProfileData.userProfileId)
             
-            if(!await database.findBy({customerEmail: data.associate.vtex_email})){
+            if(!await database.findBy({customerEmail: cliData[0].email})){
                 await database.add({ 
-                    customerEmail: data.associate.vtex_email,
+                    customerEmail: cliData[0].email,
+                    crmList: data.crm_id||data.data.crm_id,
                     orderId: order.orderId,
-                    parentOriginCode: data.associate.Id,
+                    parentOriginCode: (data.associate ? data.associate.Id : null),
                     assinaturas: []
                 })
             }
@@ -356,12 +372,12 @@ module.exports = class vtexIntegration{
                     //createUpdateUser
                     console.log("Tem assinatura ativa")
                     await (await self.subscriptions()).cancel(data) // Cancelar assinatura anterior
-                    await (await bossa.api()).createUpdateUser(clientProfileData, items[0].attachments[0].name, data.associate.vtex_email, data.associate.Id)
+                    await (await bossa.api()).createUpdateUser(clientProfileData, items[0].attachments[0].name, cliData[0].email, (data.associate.Id ? data.associate.Id : null))
                     c.delete(id) // apaga cache
                 }else{
                     if(items[0].id === "5"){
                         console.log("Plano gratis")
-                        await (await bossa.api()).createUpdateUser(clientProfileData, items[0].id, data.associate.vtex_email, data.associate.Id)
+                        await (await bossa.api()).createUpdateUser(clientProfileData, items[0].id, cliData[0].email, (data.associate.Id ? data.associate.Id : null))
                         c.delete(id) // apaga cache
                         return;
                     }
@@ -370,28 +386,14 @@ module.exports = class vtexIntegration{
                     if(items[0].attachments[0]){
                         let plano = planos[items[0].attachments[0].name]
                         console.log("Oplano:", plano)
-                        await (await bossa.api()).createUpdateUser(clientProfileData, plano, data.associate.vtex_email, data.associate.Id)
+                        await (await bossa.api()).createUpdateUser(clientProfileData, plano, cliData[0].email, (data.associate.Id ? data.associate.Id : null))
                     }
                     // Enviar dados para bossa?
                     c.delete(id) // apaga cache
                 }
             }
-
-            // let obj = {
-            //     id: sub.id,
-            //     status: sub.status,
-            //     customerEmail: sub.customerEmail,
-            //     plan: {
-            //         id: sub.plan.id
-            //     },
-            //     bossaRemoved: false
-            // }
-
-            // if(!database.findBy({id: obj.id})){
-            //     database.add(obj);
-            // }
-
-            await abf.createLeadVtex(req, {firstName:clientProfileData.firstName,lastName:clientProfileData.lastName,emailAddress:data.associate.vtex_email}, data.crm_id, status, c, id) // Cria/Atualiza o lead e adiciona a lista
+            console.log("data: ", data)
+            await abf.createLeadVtex(req, {firstName:clientProfileData.firstName,lastName:clientProfileData.lastName,emailAddress:cliData[0].email}, data.crm_id||data.data.crm_id, status, c, id) // Cria/Atualiza o lead e adiciona a lista
         }
 
         return {

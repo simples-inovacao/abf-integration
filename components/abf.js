@@ -68,7 +68,7 @@ module.exports = class abfIntegration{
             console.log("status", stt)
             console.log("Aprovado")
             let data = await this.checkifHasOnList(req, lead, list);
-
+            
             if(id){
                 c.delete(id)
             }
@@ -80,6 +80,7 @@ module.exports = class abfIntegration{
     /*======== INICIO DA CONFIGURAÇÃO DE LISTA ========*/
     async checkifHasOnList(req, lead, list){
         let userLists = await this.getListMemberships(req, lead, list);
+        // console.log(list)
 
         // if(userLists[1].code === 207) return false;
         
@@ -98,6 +99,7 @@ module.exports = class abfIntegration{
             },
             id: req.id
         });
+        console.log(data)
         if(data.result === null) return data.error;
         console.log("Inserido na lista...")
         return data.result.updates;

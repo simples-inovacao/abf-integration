@@ -81,9 +81,10 @@ module.exports = class routes{
 
         this.router.post('/automation/list/add', async function (req, res) {
             const { id, data } = req.body;
-
+            console.log("OrderId:", `${id} ou ${data.id}`)
+            // return console.log(data)
             let c = cache.init();
-            await (await vtex.orders()).checkStatus(id, data, req, c);
+            await (await vtex.orders()).checkStatus(data.id, data, req, c);
 
             res.json({status: "ok"})
         })
