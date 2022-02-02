@@ -99,7 +99,7 @@ module.exports = class abfIntegration{
             },
             id: req.id
         });
-        console.log(data)
+        // console.log(data)
         if(data.result === null) return data.error;
         console.log("Inserido na lista...")
         return data.result.updates;

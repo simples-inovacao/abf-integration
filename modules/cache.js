@@ -4,6 +4,8 @@ const fetch = require('node-fetch');
 
 const axios = require('axios').default;
 
+const database_log = new(require('../components/database'))('error_log')
+
 //https://www.npmjs.com/package/node-cache
 const NodeCache = require( "node-cache" );
 const req = require("express/lib/request");
@@ -57,7 +59,11 @@ class cacheSystem{
                         console.log("Adicionou")
                     }catch(e){
                         console.log("Houve um erro ao atualizar a lista")
-                        console.log(e)
+                        database_log.add({
+                            erro: "Houve um erro ao atualizar a lista",
+                            response_error: e.data.message,
+                            data: value
+                        })
                     }
                 break;
             }
