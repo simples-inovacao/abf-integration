@@ -70,7 +70,10 @@ class abfIntegration{
 
 					const orderForm = await vtexjs.checkout.getOrderForm();
 					var marketingData = orderForm.marketingData; 
-						marketingData = {'utmCampaign': 'associado'}; 
+						marketingData = {
+							'utmCampaign': 'associado',
+							'marketingTags': search.Id
+						};
 					await vtexjs.checkout.sendAttachment('marketingData', marketingData); 
 				  }
 
