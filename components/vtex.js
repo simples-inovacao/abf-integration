@@ -351,17 +351,16 @@ module.exports = class vtexIntegration{
             const cliData = await getClientdata(clientProfileData.userProfileId)
             
             // return console.log("Busca:", database.findBy({customerEmail: cliData[0].email}));
-            let tem = database.findBy({customerEmail: cliData[0].email})
-            console.log(tem)
-            if(!tem){
-                database.add({ 
-                    customerEmail: cliData[0].email,
-                    crmList: data.crm_id||data.data.crm_id,
-                    orderId: order.orderId,
-                    parentOriginCode: (data.associate ? data.associate.Id : null),
-                    assinaturas: []
-                })
-            }
+
+            // if(!database.findBy({customerEmail: cliData[0].email})){
+            //     database.add({ 
+            //         customerEmail: cliData[0].email,
+            //         crmList: data.crm_id||data.data.crm_id,
+            //         orderId: order.orderId,
+            //         parentOriginCode: (data.associate ? data.associate.Id : null),
+            //         assinaturas: []
+            //     })
+            // }
 
             console.log(`Cliente -> ${clientProfileData.firstName} ${clientProfileData.lastName}: ${status}`)
 
