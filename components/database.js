@@ -13,8 +13,8 @@ module.exports = class database{
         this.db.defaults({ data: [] }).write()
     }
 
-    async add(item){
-        await this.db.get('data').push(item).write();
+    add(item){
+        this.db.get('data').push(item).write();
         // this.db.read();
     }
 

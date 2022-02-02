@@ -350,8 +350,8 @@ module.exports = class vtexIntegration{
             const {status, clientProfileData, items} = order;
             const cliData = await getClientdata(clientProfileData.userProfileId)
             
-            if(!await database.findBy({customerEmail: cliData[0].email})){
-                await database.add({ 
+            if(!database.findBy({customerEmail: cliData[0].email})){
+                database.add({ 
                     customerEmail: cliData[0].email,
                     crmList: data.crm_id||data.data.crm_id,
                     orderId: order.orderId,
