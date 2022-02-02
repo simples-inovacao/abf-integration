@@ -16,7 +16,6 @@ module.exports = class database{
     async add(item){
         await this.db.get('data').push(item).write();
         // this.db.read();
-        return;
     }
 
     check(get){
