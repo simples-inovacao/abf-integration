@@ -2,7 +2,7 @@ const app = require('./modules/express')
 const cacheList = require("./modules/cacheList");
 const vtex = new(require('./components/vtex'))()
 const bossa = new(require('./components/bossa'))()
-// const database = new(require('./components/database'))('subscriptions')
+const database = new(require('./components/database'))('subscriptions')
 
 cacheList.list();
 
@@ -11,6 +11,17 @@ app.listen(3000, async() => {
     console.log("ready")
     // await (await vtex.subscriptions()).save();
     
+    // if(!database.findBy({customerEmail: "alessandrapqueiroz2@yahoo.com.br"})){
+    //     console.log("ntem")
+    //     database.add({ 
+    //         customerEmail: 1,
+    //         crmList: 2,
+    //         orderId: 3,
+    //         parentOriginCode: 4,
+    //         assinaturas: 5
+    //     })
+    // }
+
     // let data = {
     //     "parentOriginCode": 34991,
     //     "name": "SUporte TI",

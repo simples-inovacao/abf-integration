@@ -4,11 +4,9 @@ const FileSync = require('lowdb/adapters/FileSync')
 
 module.exports = class database{
     constructor(dbName){
-        console.log("banco:", dbName)
-        const adapter = new FileSync(`database/${dbName}.json`)
-        const db = low(adapter)
+        this.adapter = new FileSync(`database/${dbName}.json`)
+        this.db = low(this.adapter)
         this.db_name = dbName;
-        this.db = db;
     }
 
     createDefaults(){
@@ -17,7 +15,7 @@ module.exports = class database{
 
     add(item){
         this.db.get('data').push(item).write();
-        // this.db.read();
+        this.db.read();
     }
 
     check(get){
@@ -28,13 +26,15 @@ module.exports = class database{
         return this.db.get('data').value()
     }
     
-    async findBy(params){
-        return await this.db.get('data').find(params).value()
+    findBy(params){
+        return this.db.get('data')
+        .find(params)
+        .value()
     }
 
     async update(search, data){
         await this.db.get('data').find(search).assign(data).write()
-        // this.db.read();
+        this.db.read();
     }
 
     filterBy(params){
