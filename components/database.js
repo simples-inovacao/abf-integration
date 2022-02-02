@@ -15,7 +15,7 @@ module.exports = class database{
 
     async add(item){
         await this.db.get('data').push(item).write();
-        this.db.read();
+        // this.db.read();
         return;
     }
 
@@ -33,7 +33,7 @@ module.exports = class database{
 
     async update(search, data){
         await this.db.get('data').find(search).assign(data).write()
-        this.db.read();
+        // this.db.read();
     }
 
     filterBy(params){
