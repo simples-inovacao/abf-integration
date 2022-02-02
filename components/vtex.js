@@ -350,15 +350,15 @@ module.exports = class vtexIntegration{
             const {status, clientProfileData, items} = order;
             const cliData = await getClientdata(clientProfileData.userProfileId)
             
-            if(!await database.findBy({customerEmail: cliData[0].email})){
-                await database.add({ 
-                    customerEmail: cliData[0].email,
-                    crmList: data.crm_id||data.data.crm_id,
-                    orderId: order.orderId,
-                    parentOriginCode: (data.associate ? data.associate.Id : null),
-                    assinaturas: []
-                })
-            }
+            // if(!await database.findBy({customerEmail: cliData[0].email})){
+            //     await database.add({ 
+            //         customerEmail: cliData[0].email,
+            //         crmList: data.crm_id||data.data.crm_id,
+            //         orderId: order.orderId,
+            //         parentOriginCode: (data.associate ? data.associate.Id : null),
+            //         assinaturas: []
+            //     })
+            // }
 
             console.log(`Cliente -> ${clientProfileData.firstName} ${clientProfileData.lastName}: ${status}`)
 
