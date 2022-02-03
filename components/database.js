@@ -8,8 +8,8 @@ module.exports = class database{
         try{
             let database = new FileSync(`database/${name}.json`);
             let db = low(database);
-            db.defaults({ data: []}).write()
-            return db.get('data');
+            // db.defaults({ data: []}).write()
+            return db.defaults({ data: []}).get('data');
         }catch(e){
             console.log("Houve um erro ao acionar o banco")
             // console.log(e)
