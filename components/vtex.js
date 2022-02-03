@@ -360,7 +360,7 @@ module.exports = class vtexIntegration{
                     orderId: order.orderId,
                     parentOriginCode: (data.associate ? data.associate.Id : null),
                     assinaturas: []
-                })
+                }).write()
                 // database.write()
             }
 
