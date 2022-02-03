@@ -174,8 +174,8 @@ module.exports = class vtexIntegration{
         }
 
         async function saveDatabase(){
-            await subSearch();
             setInterval(async () => {
+                await subSearch();
             }, 60000 * 60 * 8)
         }
 
