@@ -9,9 +9,10 @@ module.exports = class database{
             let database = new FileSync(`database/${name}.json`);
             let db = low(database);
             db.defaults({ data: []}).write()
-            // return db.get('data');
+            return db.get('data');
         }catch(e){
-            console.log(e)
+            console.log("Houve um erro ao acionar o banco")
+            // console.log(e)
         }
     }
 
