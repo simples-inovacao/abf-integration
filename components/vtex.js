@@ -361,9 +361,17 @@ module.exports = class vtexIntegration{
                         parentOriginCode: (data.associate ? data.associate.Id : null),
                         assinaturas: []
                     }).write()
+                    console.log(`Banco de ${cliData[0].email} criado!`)
                 }
             }catch(e){
-                console.log(e)
+                console.log(`Houve um erro ao criar o banco de ${cliData[0].email}`)
+                console.log({
+                    customerEmail: cliData[0].email,
+                    crmList: data.crm_id||data.data.crm_id,
+                    orderId: order.orderId,
+                    parentOriginCode: (data.associate ? data.associate.Id : null),
+                    assinaturas: []
+                })
             }
 
             console.log(`Cliente -> ${clientProfileData.firstName} ${clientProfileData.lastName}: ${status}`)
