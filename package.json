@@ -16,6 +16,11 @@
     "url": "https://github.com/simples-inovacao/abf-integration/issues"
   },
   "homepage": "https://github.com/simples-inovacao/abf-integration#readme",
+  "nodemonConfig": {
+    "ignore": [
+      "database/*"
+    ]
+  },
   "dependencies": {
     "axios": "^0.24.0",
     "body-parser": "^1.19.1",
