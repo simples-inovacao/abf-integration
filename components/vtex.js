@@ -4,6 +4,8 @@ const cache = require("../modules/cache");
 const bossa = new(require("./bossa"))();
 const abf = new(require("./abf"))();
 
+const database = new(require('./database'))().getDatabase('subscriptions')
+
 module.exports = class vtexIntegration{
     masterData(){
         async function getDocument(id, entityName = "SI"){
@@ -124,7 +126,8 @@ module.exports = class vtexIntegration{
         }
 
         async function subSearch(){
-            let clients = database.find();
+            let clients = database.value();
+                clients = clients.filter(c => c.parentOriginCode !== null);
             
             for(let client of clients){
                 let assinaturas = await getSubscriptions(client.customerEmail);
@@ -146,23 +149,24 @@ module.exports = class vtexIntegration{
                         })
 
                     }
-                    // database.update({customerEmail: client.customerEmail}, client);
+                    database.find({customerEmail: client.customerEmail}).assign(client).write();
                 }
 
                 if(assActive.length <= 0 && assCanceled.length > 0){
                     if(client.assinaturas.filter(f => f.bossaRemoved === false).length <= 0) return;
                     
-                    for(let as of client.assinaturas){
-                        as.bossaRemoved = true;
+                    if(client.parentOriginCode){
+                        for(let as of client.assinaturas){
+                            as.bossaRemoved = true;
+                        }
+
+                        let remove = await (await bossa.api()).disable({
+                            email: client.customerEmail,
+                            parentOriginCode: client.parentOriginCode
+                        });
+
+                        database.find({customerEmail: client.customerEmail}).assign(client).write();
                     }
-
-                    let remove = await (await bossa.api()).disable({
-                        email: client.customerEmail,
-                        parentOriginCode: client.parentOriginCode
-                    });
-
-                    // database.update({customerEmail: client.customerEmail}, client);
-                    
                 }else if(assActive.length > 0){
                     // CASO TENHA ASSINATURA ATIVA, NÃO FAZ NADA?
                 }
@@ -170,10 +174,8 @@ module.exports = class vtexIntegration{
         }
 
         async function saveDatabase(){
-            
-
+            await subSearch();
             setInterval(async () => {
-                await subSearch();
             }, 60000 * 60 * 8)
         }
 
@@ -350,15 +352,15 @@ module.exports = class vtexIntegration{
             
             // return console.log("Busca:", database.findBy({customerEmail: cliData[0].email}));
 
-            // if(!database.findBy({customerEmail: cliData[0].email})){
-            //     database.add({ 
-            //         customerEmail: cliData[0].email,
-            //         crmList: data.crm_id||data.data.crm_id,
-            //         orderId: order.orderId,
-            //         parentOriginCode: (data.associate ? data.associate.Id : null),
-            //         assinaturas: []
-            //     })
-            // }
+            if(!database.find({customerEmail: cliData[0].email}).value()){
+                database.push({
+                    customerEmail: cliData[0].email,
+                    crmList: data.crm_id||data.data.crm_id,
+                    orderId: order.orderId,
+                    parentOriginCode: (data.associate ? data.associate.Id : null),
+                    assinaturas: []
+                }).write()
+            }
 
             console.log(`Cliente -> ${clientProfileData.firstName} ${clientProfileData.lastName}: ${status}`)
 

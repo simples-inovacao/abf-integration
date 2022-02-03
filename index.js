@@ -2,16 +2,17 @@ const app = require('./modules/express')
 const cacheList = require("./modules/cacheList");
 const vtex = new(require('./components/vtex'))()
 const bossa = new(require('./components/bossa'))()
-const database = new(require('./components/database'))('subscriptions')
+const database = new(require('./components/database'))().getDatabase('subscriptions')
 
 cacheList.list();
 
 
 app.listen(3000, async() => {
     console.log("ready")
-    // await (await vtex.subscriptions()).save();
+    // console.log(database.find({customerEmail: 'alessandrapqueiroz@yahoo.com.br'}).value())
+    await (await vtex.subscriptions()).save();
     
-    // if(!database.findBy({customerEmail: "alessandrapqueiroz2@yahoo.com.br"})){
+    // if(!database.find({customerEmail: "alessandrapqueiroz2@yahoo.com.br"}).value()){
     //     console.log("ntem")
     //     database.add({ 
     //         customerEmail: 1,

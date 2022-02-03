@@ -1,12 +1,14 @@
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
+let low = require('lowdb');
+FileSync = require('lowdb/adapters/FileSync');
+var fs = require('fs');
 
 
 module.exports = class database{
-    constructor(dbName){
-        this.adapter = new FileSync(`database/${dbName}.json`)
-        this.db = low(this.adapter)
-        this.db_name = dbName;
+    getDatabase(name){
+        let database = new FileSync(`database/${name}.json`);
+        database = low(database);
+        database.read();
+        return database.get('data');
     }
 
     createDefaults(){
