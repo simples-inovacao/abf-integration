@@ -354,8 +354,12 @@ module.exports = class vtexIntegration{
             let hasUser = database.find({customerEmail: cliData[0].email}).value();
             if(!hasUser){
                 database.push({
-                    customerEmail: cliData[0].email
-                }).write()
+                    customerEmail: cliData[0].email,
+                    crmList: data.crm_id||data.data.crm_id,
+                    orderId: order.orderId,
+                    parentOriginCode: (data.associate ? data.associate.Id : null),
+                    assinaturas: []
+                }).value()
             }
 
             console.log(`Cliente -> ${clientProfileData.firstName} ${clientProfileData.lastName}: ${status}`)
