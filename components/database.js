@@ -6,10 +6,10 @@ var fs = require('fs');
 module.exports = class database{
     getDatabase(name){
         try{
-            let database = new FileSync(`../database/${name}.json`);
-        let db = low(database);
-        db.defaults({ data: []}).write()
-        return db.get('data');
+            let database = new FileSync(`database/${name}.json`);
+            let db = low(database);
+            db.defaults({ data: []}).write()
+            // return db.get('data');
         }catch(e){
             console.log(e)
         }
