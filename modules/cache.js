@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 
 const axios = require('axios').default;
 
-const database_log = new(require('../components/database'))('error_log')
+// const database_log = new(require('../components/database'))('error_log')
 
 //https://www.npmjs.com/package/node-cache
 const NodeCache = require( "node-cache" );

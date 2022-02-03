@@ -4,8 +4,6 @@ const cache = require("../modules/cache");
 const bossa = new(require("./bossa"))();
 const abf = new(require("./abf"))();
 
-const database = new(require('./database'))('subscriptions')
-
 module.exports = class vtexIntegration{
     masterData(){
         async function getDocument(id, entityName = "SI"){
@@ -148,7 +146,7 @@ module.exports = class vtexIntegration{
                         })
 
                     }
-                    database.update({customerEmail: client.customerEmail}, client);
+                    // database.update({customerEmail: client.customerEmail}, client);
                 }
 
                 if(assActive.length <= 0 && assCanceled.length > 0){
@@ -163,7 +161,7 @@ module.exports = class vtexIntegration{
                         parentOriginCode: client.parentOriginCode
                     });
 
-                    database.update({customerEmail: client.customerEmail}, client);
+                    // database.update({customerEmail: client.customerEmail}, client);
                     
                 }else if(assActive.length > 0){
                     // CASO TENHA ASSINATURA ATIVA, NÃO FAZ NADA?
@@ -352,15 +350,15 @@ module.exports = class vtexIntegration{
             
             // return console.log("Busca:", database.findBy({customerEmail: cliData[0].email}));
 
-            if(!database.findBy({customerEmail: cliData[0].email})){
-                database.add({ 
-                    customerEmail: cliData[0].email,
-                    crmList: data.crm_id||data.data.crm_id,
-                    orderId: order.orderId,
-                    parentOriginCode: (data.associate ? data.associate.Id : null),
-                    assinaturas: []
-                })
-            }
+            // if(!database.findBy({customerEmail: cliData[0].email})){
+            //     database.add({ 
+            //         customerEmail: cliData[0].email,
+            //         crmList: data.crm_id||data.data.crm_id,
+            //         orderId: order.orderId,
+            //         parentOriginCode: (data.associate ? data.associate.Id : null),
+            //         assinaturas: []
+            //     })
+            // }
 
             console.log(`Cliente -> ${clientProfileData.firstName} ${clientProfileData.lastName}: ${status}`)
 
