@@ -58,12 +58,14 @@ class cacheSystem{
                         })
                         console.log("Adicionou")
                     }catch(e){
-                        console.log("Houve um erro ao atualizar a lista")
-                        database_log.add({
-                            erro: "Houve um erro ao atualizar a lista",
-                            response_error: e.data.message,
-                            data: value
-                        })
+                        console.log("Houve um erro ao atualizar a lista: ", e.data.message)
+                        console.log("Dados enviados:", value)
+                        myCache.del(key);
+                        // database_log.add({
+                        //     erro: "Houve um erro ao atualizar a lista",
+                        //     response_error: e.data.message,
+                        //     data: value
+                        // })
                     }
                 break;
             }
