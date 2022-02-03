@@ -6,78 +6,7 @@
       "orderId": "1207831159139-01",
       "parentOriginCode": 1234,
       "assinaturas": [
-        {
-          "id": "88571AD134152EA9D23730ABBF22AC01",
-          "status": "CANCELED",
-          "customerEmail": "tsales@simplesinovacao.com",
-          "plan": {
-            "id": "vtex.subscription.plano-basico"
-          },
-          "bossaRemoved": true
-        },
-        {
-          "id": "2DA3A01B4CE02A640C6E86C921C97EAA",
-          "status": "CANCELED",
-          "customerEmail": "tsales@simplesinovacao.com",
-          "plan": {
-            "id": "vtex.subscription.plano-premium"
-          },
-          "bossaRemoved": true
-        },
-        {
-          "id": "3569B7222158A6659DC14605880CDBF6",
-          "status": "CANCELED",
-          "customerEmail": "tsales@simplesinovacao.com",
-          "plan": {
-            "id": "vtex.subscription.plano-basico"
-          },
-          "bossaRemoved": true
-        },
-        {
-          "id": "D37D3A4EA38B558326D3AE5DCE8E0B1C",
-          "status": "CANCELED",
-          "customerEmail": "tsales@simplesinovacao.com",
-          "plan": {
-            "id": "vtex.subscription.plano-premium"
-          },
-          "bossaRemoved": true
-        },
-        {
-          "id": "4FFC7883AD0E6628020E0E6127178316",
-          "status": "CANCELED",
-          "customerEmail": "tsales@simplesinovacao.com",
-          "plan": {
-            "id": "vtex.subscription.plano-premium"
-          },
-          "bossaRemoved": true
-        },
-        {
-          "id": "AAEEEBB114484057370284B9A2632CFC",
-          "status": "CANCELED",
-          "customerEmail": "tsales@simplesinovacao.com",
-          "plan": {
-            "id": "vtex.subscription.plano-gratuito"
-          },
-          "bossaRemoved": true
-        },
-        {
-          "id": "E181DA454BF25E0ECA60054CE4BD873B",
-          "status": "CANCELED",
-          "customerEmail": "tsales@simplesinovacao.com",
-          "plan": {
-            "id": "vtex.subscription.plano-gratuito"
-          },
-          "bossaRemoved": true
-        },
-        {
-          "id": "ADF25A0CA6265908674EE2F7DF27884E",
-          "status": "CANCELED",
-          "customerEmail": "tsales@simplesinovacao.com",
-          "plan": {
-            "id": "vtex.subscription.plano-premium"
-          },
-          "bossaRemoved": true
-        }
+        
       ]
     }
   ]
