@@ -7,9 +7,9 @@ module.exports = class database{
     getDatabase(name){
         let database = new FileSync(`database/${name}.json`);
         database = low(database);
-        database.defaults({ data: [] }).value()
+        const data = database.defaults({ data: [] }).get('data')
         // database.read();
-        return database.get('data');
+        return data;
     }
 
     createDefaults(){
