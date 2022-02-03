@@ -359,7 +359,7 @@ module.exports = class vtexIntegration{
                     orderId: order.orderId,
                     parentOriginCode: (data.associate ? data.associate.Id : null),
                     assinaturas: []
-                }).value()
+                }).write()
             }
 
             console.log(`Cliente -> ${clientProfileData.firstName} ${clientProfileData.lastName}: ${status}`)
