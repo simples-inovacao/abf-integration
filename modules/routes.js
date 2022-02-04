@@ -83,7 +83,7 @@ module.exports = class routes{
             const { id, data } = req.body;
             console.log("OrderId:", `${id||data.id}`)
             let c = cache.init();
-            console.log(data)
+            
             await (await vtex.orders()).checkStatus(id||data.id, data, req, c);
 
             res.json({status: "ok"}) 
