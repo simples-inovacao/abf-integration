@@ -348,7 +348,7 @@ module.exports = class vtexIntegration{
             ]
 
             console.log("id: ",id)
-
+            
             let order = await getOrder(id);
             const {status, clientProfileData, items} = order;
             const cliData = await getClientdata(clientProfileData.userProfileId)
