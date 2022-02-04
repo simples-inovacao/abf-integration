@@ -145,9 +145,11 @@ module.exports = class bossaIntegration{
                 return;
             }
             
-            let change = await changeUserPlan(dataPlan)
             console.log("tem usuário, atualizando...")
-            console.log(change)
+            setTimeout(async () => {
+                let change = await changeUserPlan(dataPlan)
+                console.log(change.response.data)
+            }, 3000)
         }
 
         async function deactiveUser(user){
