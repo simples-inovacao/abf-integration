@@ -86,7 +86,7 @@ module.exports = class routes{
             let c = cache.init();
             await (await vtex.orders()).checkStatus(data.id, data.data, req, c);
 
-            res.json({status: "ok"})
+            res.json({status: "ok"}) 
         })
         
         /*====== ROTAS ORDER PLACED =====*/
