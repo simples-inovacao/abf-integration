@@ -347,8 +347,6 @@ module.exports = class vtexIntegration{
                 "window-to-cancel"
             ]
 
-            console.log("Orderid: ",id)
-
             let order = await getOrder(id);
             const {status, clientProfileData, items} = order;
             const cliData = await getClientdata(clientProfileData.userProfileId)
