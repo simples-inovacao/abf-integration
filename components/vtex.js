@@ -354,7 +354,7 @@ module.exports = class vtexIntegration{
             // return console.log("Busca:", database.findBy({customerEmail: cliData[0].email}));
             // try{
             //     let hasUser = database.find({customerEmail: cliData[0].email}).value();
-            //     if(!hasUser){
+            //     if(!hasUser){ 
             //         database.push({
             //             customerEmail: cliData[0].email,
             //             crmList: data.crm_id||data.data.crm_id,
