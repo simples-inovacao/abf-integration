@@ -338,6 +338,7 @@ module.exports = class vtexIntegration{
                 "approve-payment",
                 "payment-approved",
                 "ready-for-handling",
+                "authorize-fulfillment",
                 "start-handling",
                 "handling",
                 "cancel",
