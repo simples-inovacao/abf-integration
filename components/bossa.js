@@ -1,5 +1,6 @@
 const { bossa: {host, username, password, parentOriginCode, planos} } = require("../configs/dataConfig.json")
 const axios = require("../modules/axios")
+const database_log = new(require('./database'))().getDatabase('error_log')
 
 module.exports = class bossaIntegration{
     async query(url, method, params = null){
@@ -46,7 +47,12 @@ module.exports = class bossaIntegration{
 
             return response.data;
         } catch (error) {
-            console.log(error)
+            console.log("Houve um erro ao criar o usuário na Bossa")
+            database_log.push({
+                erro: "Houve um erro ao criar o usuário na Bossa",
+                response_error: error.data.message,
+                user: user
+            }).write()
         }
     }
 
@@ -66,7 +72,12 @@ module.exports = class bossaIntegration{
             
             return response.data;
         } catch (error) {
-            console.log(error)
+            console.log("Houve um erro ao atualizar o plano")
+            database_log.push({
+                erro: "Houve um erro ao atualizar o plano",
+                response_error: error.data.message,
+                user: user
+            }).write()
         }
     }
 
