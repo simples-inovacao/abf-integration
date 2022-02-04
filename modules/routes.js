@@ -81,8 +81,9 @@ module.exports = class routes{
 
         this.router.post('/automation/list/add', async function (req, res) {
             const { id, data } = req.body;
-            console.log("OrderId:", `${id} ou ${data.id}`)
-            // return console.log(data)
+            console.log("OrderId:", `${id||data.id}`)
+            console.log(data)
+            if(!data) return res.json({status: "O conteúdo 'data' está vazio"});
             let c = cache.init();
             await (await vtex.orders()).checkStatus(data.id, data.data, req, c);
 
@@ -93,7 +94,7 @@ module.exports = class routes{
         this.router.post('/vtex/orderplaced/add', async function (req, res) {
             const { data } = req.body;
 
-            if(!data) return res.json({status: "O conteúdo 'data' veio vazio"});
+            if(!data) return res.json({status: false});
             
             let c = cache.init();
             if(!c.check(`${data.orderId}-01`)) {
