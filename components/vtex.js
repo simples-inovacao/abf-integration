@@ -347,35 +347,33 @@ module.exports = class vtexIntegration{
                 "window-to-cancel"
             ]
 
-            console.log(data)
-
             let order = await getOrder(id);
             const {status, clientProfileData, items} = order;
             const cliData = await getClientdata(clientProfileData.userProfileId)
             
             // return console.log("Busca:", database.findBy({customerEmail: cliData[0].email}));
-            try{
-                let hasUser = database.find({customerEmail: cliData[0].email}).value();
-                if(!hasUser){
-                    database.push({
-                        customerEmail: cliData[0].email,
-                        crmList: data.crm_id||data.data.crm_id,
-                        orderId: order.orderId,
-                        parentOriginCode: (data.associate ? data.associate.Id : null),
-                        assinaturas: []
-                    }).write()
-                    console.log(`Banco de ${cliData[0].email} criado!`)
-                }
-            }catch(e){
-                console.log(`Houve um erro ao criar o banco de ${cliData[0].email}`)
-                console.log({
-                    customerEmail: cliData[0].email,
-                    crmList: data.crm_id||data.data.crm_id,
-                    orderId: order.orderId,
-                    parentOriginCode: (data.associate ? data.associate.Id : null),
-                    assinaturas: []
-                })
-            }
+            // try{
+            //     let hasUser = database.find({customerEmail: cliData[0].email}).value();
+            //     if(!hasUser){
+            //         database.push({
+            //             customerEmail: cliData[0].email,
+            //             crmList: data.crm_id||data.data.crm_id,
+            //             orderId: order.orderId,
+            //             parentOriginCode: (data.associate ? data.associate.Id : null),
+            //             assinaturas: []
+            //         }).write()
+            //         console.log(`Banco de ${cliData[0].email} criado!`)
+            //     }
+            // }catch(e){
+            //     console.log(`Houve um erro ao criar o banco de ${cliData[0].email}`)
+            //     console.log({
+            //         customerEmail: cliData[0].email,
+            //         crmList: data.crm_id||data.data.crm_id,
+            //         orderId: order.orderId,
+            //         parentOriginCode: (data.associate ? data.associate.Id : null),
+            //         assinaturas: []
+            //     })
+            // }
 
             console.log(`Cliente -> ${clientProfileData.firstName} ${clientProfileData.lastName}: ${status}`)
 
