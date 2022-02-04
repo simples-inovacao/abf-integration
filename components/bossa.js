@@ -107,6 +107,8 @@ module.exports = class bossaIntegration{
             if(!oPlano) return console.log("Plano não encontrado");
             if(!email) return console.log("Email não encontrado?");
 
+            console.log("Email: ", email)
+
             function formataNumeroTelefone(numero) {
                 numero = numero.toString();
               var length = numero.length;
