@@ -56,7 +56,7 @@ class cacheSystem{
                             id: key,
                             data: value
                         })
-                        console.log("Adicionou")
+                        console.log(response.data.status)
                     }catch(e){
                         console.log("Houve um erro ao atualizar a lista: ", e.data.message)
                         console.log("Dados enviados:", value)

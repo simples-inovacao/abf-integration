@@ -93,7 +93,7 @@ module.exports = class routes{
         this.router.post('/vtex/orderplaced/add', async function (req, res) {
             const { data } = req.body;
 
-            if(!data) return res.json({status: false});
+            if(!data) return res.json({status: "O conteúdo 'data' veio vazio"});
             
             let c = cache.init();
             if(!c.check(`${data.orderId}-01`)) {
