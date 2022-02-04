@@ -350,7 +350,7 @@ module.exports = class vtexIntegration{
             let order = await getOrder(id);
             const {status, clientProfileData, items} = order;
             const cliData = await getClientdata(clientProfileData.userProfileId)
-            console.log("To chegando antes do banco")
+            
             // return console.log("Busca:", database.findBy({customerEmail: cliData[0].email}));
             try{
                 let hasUser = database.find({customerEmail: cliData[0].email}).value();
@@ -374,11 +374,11 @@ module.exports = class vtexIntegration{
                     assinaturas: []
                 })
             }
-            console.log("To chegando após o banco")
+
             console.log(`Cliente -> ${clientProfileData.firstName} ${clientProfileData.lastName}: ${status}`)
 
             let stt = statusToCheck.find(s => s == status);
-            console.log("To chegando até o find")
+            
             if(stt === "cancel" || stt === "canceled"){
                 // ignora
                 c.delete(id) // apaga cache
