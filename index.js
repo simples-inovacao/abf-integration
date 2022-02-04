@@ -10,7 +10,7 @@ cacheList.list();
 app.listen(3000, async() => {
     console.log("ready")
     // console.log(database.find({customerEmail: 'alessandrapqueiroz@yahoo.com.br'}).value())
-    await (await vtex.subscriptions()).save();
+    // await (await vtex.subscriptions()).save();
 
     // database.push({customerEmail: "alessandrapqueiroz2@yahoo.com.br"}).write()
     
