@@ -20,7 +20,7 @@
     "bossa": {
         "username": "vtex",
         "password": "JKt%&egFdRtsRD28S",
-        "host": "https://jzdl1lw4eb.execute-api.us-east-1.amazonaws.com/v1/vtex",
+        "host": "https://hu47n7gpx2.execute-api.us-east-1.amazonaws.com/v1/vtex",
         "parentOriginCode": "110",
         "planos": {
             "vtex.subscription.plano-gratuito": "38",
