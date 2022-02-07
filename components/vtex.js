@@ -133,7 +133,7 @@ module.exports = class vtexIntegration{
                 let assinaturas = await getSubscriptions(client.customerEmail);
                 let assCanceled = assinaturas.filter(f => f.status == "CANCELED");
                 let assActive = assinaturas.filter(f => f.status == "ACTIVE");
-
+                
                 if(client.assinaturas.length !== assinaturas.length){
                     client.assinaturas = [];
 

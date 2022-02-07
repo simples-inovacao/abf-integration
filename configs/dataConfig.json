@@ -23,9 +23,9 @@
         "host": "https://jzdl1lw4eb.execute-api.us-east-1.amazonaws.com/v1/vtex",
         "parentOriginCode": "110",
         "planos": {
-            "vtex.subscription.plano-gratuito": "38",
-            "vtex.subscription.plano-basico": "39",
-            "vtex.subscription.plano-premium": "40"
+            "vtex.subscription.plano-gratuito": "44",
+            "vtex.subscription.plano-basico": "45",
+            "vtex.subscription.plano-premium": "46"
         }
     },
     "cache": {
