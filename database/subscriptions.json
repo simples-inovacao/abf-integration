@@ -6,8 +6,317 @@
       "orderId": "1207831159139-01",
       "parentOriginCode": 1234,
       "assinaturas": [
-        
+        {
+          "id": "88571AD134152EA9D23730ABBF22AC01",
+          "status": "CANCELED",
+          "customerEmail": "tsales@simplesinovacao.com",
+          "plan": {
+            "id": "vtex.subscription.plano-basico"
+          },
+          "bossaRemoved": true
+        },
+        {
+          "id": "2DA3A01B4CE02A640C6E86C921C97EAA",
+          "status": "CANCELED",
+          "customerEmail": "tsales@simplesinovacao.com",
+          "plan": {
+            "id": "vtex.subscription.plano-premium"
+          },
+          "bossaRemoved": true
+        },
+        {
+          "id": "3569B7222158A6659DC14605880CDBF6",
+          "status": "CANCELED",
+          "customerEmail": "tsales@simplesinovacao.com",
+          "plan": {
+            "id": "vtex.subscription.plano-basico"
+          },
+          "bossaRemoved": true
+        },
+        {
+          "id": "D37D3A4EA38B558326D3AE5DCE8E0B1C",
+          "status": "CANCELED",
+          "customerEmail": "tsales@simplesinovacao.com",
+          "plan": {
+            "id": "vtex.subscription.plano-premium"
+          },
+          "bossaRemoved": true
+        },
+        {
+          "id": "4FFC7883AD0E6628020E0E6127178316",
+          "status": "CANCELED",
+          "customerEmail": "tsales@simplesinovacao.com",
+          "plan": {
+            "id": "vtex.subscription.plano-premium"
+          },
+          "bossaRemoved": true
+        },
+        {
+          "id": "AAEEEBB114484057370284B9A2632CFC",
+          "status": "CANCELED",
+          "customerEmail": "tsales@simplesinovacao.com",
+          "plan": {
+            "id": "vtex.subscription.plano-gratuito"
+          },
+          "bossaRemoved": true
+        },
+        {
+          "id": "E181DA454BF25E0ECA60054CE4BD873B",
+          "status": "CANCELED",
+          "customerEmail": "tsales@simplesinovacao.com",
+          "plan": {
+            "id": "vtex.subscription.plano-gratuito"
+          },
+          "bossaRemoved": true
+        },
+        {
+          "id": "ADF25A0CA6265908674EE2F7DF27884E",
+          "status": "CANCELED",
+          "customerEmail": "tsales@simplesinovacao.com",
+          "plan": {
+            "id": "vtex.subscription.plano-premium"
+          },
+          "bossaRemoved": true
+        }
       ]
+    },
+    {
+      "customerEmail": "carmelita.freire@happygrupo.com.br",
+      "crmList": "5234999298",
+      "orderId": "1209302938051-01",
+      "parentOriginCode": 11880,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "tiago.kallas@grupoburgues.com.br",
+      "crmList": "5235001346",
+      "orderId": "1209381712394-01",
+      "parentOriginCode": 34949,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "roberta.vitorino@abf.com.br",
+      "crmList": "5236661250",
+      "orderId": "1209533275002-01",
+      "parentOriginCode": 1351,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "rosegavioes@hotmail.com",
+      "crmList": "5235000322",
+      "orderId": "1209552053471-01",
+      "parentOriginCode": 36826,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "rawlinson@beetools.com.br",
+      "crmList": "5235000322",
+      "orderId": "1209732966695-01",
+      "parentOriginCode": 32415,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "diretoria@especialistavistorias.com.br",
+      "crmList": "5235000322",
+      "orderId": "1209742644041-01",
+      "parentOriginCode": 38864,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "vivianevazcastro91@gmail.com",
+      "crmList": "5234988034",
+      "orderId": "1209742722263-01",
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "suporte@gojuice.com.br",
+      "crmList": "5235000322",
+      "orderId": "1209740174619-01",
+      "parentOriginCode": 38721,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "luciano@biscoite.com.br",
+      "crmList": "5235000322",
+      "orderId": "1209740680859-01",
+      "parentOriginCode": 38639,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "franquias@hiperfesta.com",
+      "crmList": "5235000322",
+      "orderId": "1209752910937-01",
+      "parentOriginCode": 29827,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "juliana@spedini.com.br",
+      "crmList": "5235000322",
+      "orderId": "1209751048207-01",
+      "parentOriginCode": 32,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "akpmariano@yahoo.com.br",
+      "crmList": "5235000322",
+      "orderId": "1209760323966-01",
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "afraniohw@gmail.com",
+      "crmList": "5236661250",
+      "orderId": "1209761327679-01",
+      "parentOriginCode": 39019,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "ebedeschi@yahoo.com.br",
+      "crmList": "5235000322",
+      "orderId": "1209770998491-01",
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "giovanatomiello@hotmail.com",
+      "crmList": "5234988034",
+      "orderId": "1209811982636-01",
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "gildares@gmail.com",
+      "crmList": "5235002370",
+      "orderId": "1209852700742-01",
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "dr.rfbastos@gmail.com",
+      "crmList": "<a href=\"tel:5234988034\">5234988034</a>",
+      "orderId": "1209941523558-01",
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "diretoria@todeschinisa.com.br",
+      "crmList": "5234988034",
+      "orderId": "1209963372734-01",
+      "parentOriginCode": 29382,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "fontesfausto@gmail.com",
+      "crmList": "<a href=\"tel:5235000322\">5235000322</a>",
+      "orderId": "1209971018631-01",
+      "parentOriginCode": 38858,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "carloshenrique@seuchurros.com",
+      "crmList": "5235000322",
+      "orderId": "1210002898220-01",
+      "parentOriginCode": 29310,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "matheus@quierocafe.com.br",
+      "crmList": "5235000322",
+      "orderId": "1210010356492-01",
+      "parentOriginCode": 35247,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "vanessa.comercial@franquiasupera.com.br",
+      "crmList": "5235000322",
+      "orderId": "1210020693522-01",
+      "parentOriginCode": 691,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "ricardo@franquiasntw.com.br",
+      "crmList": "5235000322",
+      "orderId": "1210052623359-01",
+      "parentOriginCode": 1437,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "atendimento@farmaefarma.com.br",
+      "crmList": "5235000322",
+      "orderId": "1210050461237-01",
+      "parentOriginCode": 1806,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "vania@churrosdacalais.com.br",
+      "crmList": "5235000322",
+      "orderId": "1210232226896-01",
+      "parentOriginCode": 38879,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "edmundo@ecopower.com.br",
+      "crmList": "5235000322",
+      "orderId": "1210553570964-01",
+      "parentOriginCode": 38287,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "mirtesjardim@hotmail.com",
+      "crmList": "5234988034",
+      "orderId": "1210700931371-01",
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "marcelo@didio.com.br",
+      "crmList": "5235000322",
+      "orderId": "1210741788799-01",
+      "parentOriginCode": 1204,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "priscila.alcantara@auxiliadorapredial.com.br",
+      "crmList": "5236771842",
+      "orderId": "1210750067729-01",
+      "parentOriginCode": 1004,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "comercial@acainokilo.com.br",
+      "crmList": "5234999298",
+      "orderId": "1210750358799-01",
+      "parentOriginCode": 36223,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "saf10@farmaefarma.com.br",
+      "crmList": "5236771842",
+      "orderId": "1210762130723-01",
+      "parentOriginCode": 1806,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "dayannearaujo@depylaction.com",
+      "crmList": "5236771842",
+      "orderId": "1210760610289-01",
+      "parentOriginCode": 558,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "fj.fernandes@fjf.com.br",
+      "crmList": "5234999298",
+      "orderId": "1210771879771-01",
+      "parentOriginCode": 439,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "diana.leite@divinofogao.com.br",
+      "crmList": "5234999298",
+      "orderId": "1210772600054-01",
+      "parentOriginCode": 446,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "administrativo@chickentown.com.br",
+      "crmList": "5236661250",
+      "orderId": "1210773258669-01",
+      "parentOriginCode": 37283,
+      "assinaturas": []
     }
   ]
 }
