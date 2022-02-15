@@ -146,7 +146,7 @@ module.exports = class bossaIntegration{
                 "parentOriginCode": originCode,
                 "email": email,
                 "idGroups": parseInt(oPlano)
-            };
+            }; 
             
             let user = await findUser(email, originCode)
             if(!user){
