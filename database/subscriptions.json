@@ -317,6 +317,117 @@
       "orderId": "1210773258669-01",
       "parentOriginCode": 37283,
       "assinaturas": []
+    },
+    {
+      "customerEmail": "dpo@myplaceoffice.com.br",
+      "crmList": "5236661250",
+      "orderId": "1210803206100-01",
+      "parentOriginCode": 32513,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "pamela.spinelli@bischoff.group",
+      "crmList": "5234999298",
+      "orderId": "1210910638051-01",
+      "parentOriginCode": 1275,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "rafael.cerri@casadoconstrutor.com.br",
+      "crmList": "5235000322",
+      "orderId": "1210911311646-01",
+      "parentOriginCode": 88,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "comercial@escolaguga.com.br",
+      "crmList": "5235000322",
+      "orderId": "1210911669509-01",
+      "parentOriginCode": 5635,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "melania@clinicaodontotop.com.br",
+      "crmList": "5234999298",
+      "orderId": "1210922881913-01",
+      "parentOriginCode": 38014,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "mariana.cintra@apolar.com.br",
+      "crmList": "5234999298",
+      "orderId": "1210932397876-01",
+      "parentOriginCode": 1439,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "luiza_santamaria@hotmail.com",
+      "crmList": "5234988034",
+      "orderId": "1210940425094-01",
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "bruna.e@lunelli.com.br",
+      "crmList": "5236771842",
+      "orderId": "1210941608957-01",
+      "parentOriginCode": 8178,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "expansao@urbanarts.com.br",
+      "crmList": "5236661250",
+      "orderId": "1210973544554-01",
+      "parentOriginCode": 1758,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "administrativo@novoaprado.com.br",
+      "crmList": "5234999298",
+      "orderId": "1210970862850-01",
+      "parentOriginCode": 379,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "gabriela.mollo@novoaprado.com.br",
+      "crmList": "5234999298",
+      "orderId": "1210982396399-01",
+      "parentOriginCode": 379,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "gilson@zucolotto.com.br",
+      "crmList": "5234999298",
+      "orderId": "1210981459354-01",
+      "parentOriginCode": 8777,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "alexandre.bruno@stellabarros.com.br",
+      "crmList": "5235000322",
+      "orderId": "1210990196367-01",
+      "parentOriginCode": 37615,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "gabrielamelo44@gmail.com",
+      "crmList": "5234988034",
+      "orderId": "1211002719191-01",
+      "parentOriginCode": 5533,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "camila.melo@portergroup.com.br",
+      "crmList": "5234999298",
+      "orderId": "1211000074545-01",
+      "parentOriginCode": 11072,
+      "assinaturas": []
+    },
+    {
+      "customerEmail": "ggbazzo@gmail.com",
+      "crmList": "5235000322",
+      "orderId": "1211011683608-01",
+      "parentOriginCode": 31213,
+      "assinaturas": []
     }
   ]
 }
