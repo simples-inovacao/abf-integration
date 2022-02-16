@@ -52,7 +52,7 @@ class cacheSystem{
                     console.log(key, "CACHE EXPIRADO - RENOVANDO");
                     myCache.set(key, value)
                     try{
-                        let response = await axios.post('https://simples.tutoriaiseinformatica.com/automation/list/add', {
+                        let response = await axios.post('https://abf.simplesinovacao.com/automation/list/add', {
                             id: key,
                             data: value
                         })

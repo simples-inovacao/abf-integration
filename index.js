@@ -7,7 +7,7 @@ const database = new(require('./components/database'))().getDatabase('subscripti
 cacheList.list();
 
 
-app.listen(3000, async() => {
+app.listen(3301, async() => {
     console.log("ready")
     // console.log(database.find({customerEmail: 'alessandrapqueiroz@yahoo.com.br'}).value())
     await (await vtex.subscriptions()).save();

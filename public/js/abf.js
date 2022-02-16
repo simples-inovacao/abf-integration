@@ -252,7 +252,7 @@ class abfIntegration{
 		
 		async function validateData({value}){
 			if(value === "") return throwError("Insira o seu CNPJ");
-			const { data } = await self.query('GET', 'https://simples.tutoriaiseinformatica.com/database?doc='+value);
+			const { data } = await self.query('GET', 'https://abf.simplesinovacao.com/database?doc='+value);
 			// console.log(data)
 			let search = data.filter(d => d.Document === value);
 			
@@ -387,7 +387,7 @@ class abfIntegration{
 		storage = JSON.parse(storage);
 		storage.orderId = location.search.replace("?og=", "");
 		
-		let response = await fetch(`https://simples.tutoriaiseinformatica.com/vtex/orderplaced/add`, {
+		let response = await fetch(`https://abf.simplesinovacao.com/vtex/orderplaced/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
