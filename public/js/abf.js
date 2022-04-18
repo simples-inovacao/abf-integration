@@ -94,7 +94,7 @@ class abfIntegration{
 		})
 	}
 	async getUserSubscriptions(email){
-		return await this.query('GET', 'https://simples.tutoriaiseinformatica.com/vtex/assinaturas/get?email='+email);
+		return await this.query('GET', 'https://abf.simplesinovacao.com/vtex/assinaturas/get?email='+email);
 	}
 	escapeRegExp(string) {
 		return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string

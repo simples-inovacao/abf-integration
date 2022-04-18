@@ -319,12 +319,10 @@
       "assinaturas": []
     },
     {
-<<<<<<< HEAD
       "customerEmail": "testedasimplesth02@yopmail.com",
       "crmList": "5234999298",
       "orderId": "1211101940410-01",
       "parentOriginCode": 34991,
-=======
       "customerEmail": "dpo@myplaceoffice.com.br",
       "crmList": "5236661250",
       "orderId": "1210803206100-01",
@@ -433,7 +431,6 @@
       "crmList": "5235000322",
       "orderId": "1211011683608-01",
       "parentOriginCode": 31213,
->>>>>>> d19f5ff4491feb9b71ab266e072bf8eb348d1eec
       "assinaturas": []
     }
   ]
