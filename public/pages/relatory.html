@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Relatório - ABF</title>
+
+    <style>
+        *{
+            margin: 0;
+        }
+    </style>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-6 offset-md-3 card">
+            <form method="POST" action="/relatoryList" class="card-body">
+                <div class="mb-3 form-check" style="margin: 0 !important;">
+                    <input type="checkbox" name="filterByPeriod" class="form-check-input" id="filterByPeriod" value="true">
+                    <label class="form-check-label" for="filterByPeriod">Filtrar por período?</label>
+                </div>
+
+                <br>
+
+                <div class="period gap-2 justify-content-md-center" style="display: none;">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-auto">
+                          <input type="date" name="startDate" class="form-control">
+                        </div>
+                        <div class="col-auto">
+                          <span id="passwordHelpInline" class="form-text">
+                            Data inicial
+                          </span>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-3 align-items-center">
+                        <div class="col-auto">
+                          <input type="date" name="finalDate" class="form-control">
+                        </div>
+                        <div class="col-auto">
+                          <span id="passwordHelpInline" class="form-text">
+                            Data Final
+                          </span>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="submit" class="btn btn-outline-success">Buscar Resultados</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#filterByPeriod").click(({target}) => {
+            if(target.checked){
+                $(".period").css("display", "flex")
+            }else{
+                $(".period").css("display", "none")
+            }
+        })
+    </script>
+</body>
+</html>

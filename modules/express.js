@@ -11,6 +11,8 @@ app.use(bodyParser.json())
 
 app.use(requestID());
 
+app.set('view engine', 'ejs');
+app.set('views', './public/pages');
 app.use(express.static('./public'));
 
 const routes = new(require('./routes'))(app).routerList();

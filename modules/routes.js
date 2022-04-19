@@ -2,6 +2,10 @@ const abf = new(require("../components/abf"))()
 const cache = require('./cache');
 const vtex = new(require('../components/vtex'))()
 
+const path = require('path');
+
+const relatory = new(require("../components/relatory"))();
+
 let database = [];
 
 module.exports = class routes{
@@ -18,6 +22,18 @@ module.exports = class routes{
             
             res.json({status: "salve"});
         })
+
+        this.router.get('/relatory', (req, res) => {
+            res.sendFile('pages/relatory.html', {root: 'public' })
+        });
+
+        this.router.post('/relatoryList', (req, res) => relatory.getList(req, res))
+
+        // this.router.get('/relatoryList', async function (req, res) {
+        //     // let response = await abf.createLeadVtex(req, {firstName:"Simples",lastName:"Inovação",emailAddress:"testedasimples@yopmail.com"}, 5230840834)
+            
+        //     res.json({status: "salve"});
+        // })
 
         /*====== ROTAS BANCO TRIBECCA =====*/
         this.router.get('/database', async function (req, res) {
