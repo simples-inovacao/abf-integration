@@ -60,6 +60,7 @@ class relatory{
             // console.log(item.items[0].originalOrderId)
             let data = await getOrder(item.items[item.items.length-1].originalOrderId)
             item.assocId = data.marketingData.marketingTags[0];
+            item.plan = data.items[0].name;
         }
 
         res.render('result', {list: list});
